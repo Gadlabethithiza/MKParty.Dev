@@ -1,0 +1,49 @@
+﻿body {
+    background-color: #2E8B57;
+}
+
+.swagger-ui .topbar {
+    background: #D4AF37;
+}
+
+.topbar-wrapper img[alt="Swagger UI"], .topbar-wrapper span {
+    visibility: hidden;
+}
+
+.servers {
+    display: none
+}
+
+.topbar-wrapper .link:after {
+    padding: 80px;
+    display: inline-block;
+    width: 250px;
+    height: 120px;
+    margin-right: 1px;
+    content: "";
+    background: url("uMkhonto-Wesizwe-logo.png") no-repeat 0 0;
+    background-size: 100%;
+}
+
+.swagger-ui .topbar .download-url-wrapper .select-label select {
+    border-color: #008000;
+}
+
+/*.swagger-ui .info .title small:last-child {
+    background-color: #D4AF37 !important;
+}
+
+
+
+.swagger-ui .topbar .download-url-wrapper {
+    display: none;
+}
+
+.swagger-ui .info hgroup.main a {
+    display: none;
+}
+
+.swagger-ui section.models {
+    display: none;
+}
+*/

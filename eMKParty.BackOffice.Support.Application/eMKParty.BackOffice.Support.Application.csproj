@@ -1,0 +1,93 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DTOs\" />
+    <None Remove="Common\" />
+    <None Remove="Common\Exceptions\" />
+    <None Remove="Common\Mappings\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Interfaces\Repositories\" />
+    <None Remove="Features\" />
+    <None Remove="Features\Memberships\" />
+    <None Remove="Features\Branches\" />
+    <None Remove="Features\Provinces\" />
+    <None Remove="Features\Wards\" />
+    <None Remove="Features\Branches\Commands\" />
+    <None Remove="Features\Branches\Queries\" />
+    <None Remove="Features\Memberships\Commands\" />
+    <None Remove="Features\Memberships\Queries\" />
+    <None Remove="Features\Provinces\Commands\" />
+    <None Remove="Features\Provinces\Queries\" />
+    <None Remove="Features\Wards\Commands\" />
+    <None Remove="Features\Wards\Queries\" />
+    <None Remove="Extensions\" />
+    <None Remove="Features\Players\" />
+    <None Remove="Features\Players\Commands\" />
+    <None Remove="Features\Players\Queries\" />
+    <None Remove="Features\Players\Commands\CreatePlayer\" />
+    <None Remove="Features\Players\Commands\DeletePlayer\" />
+    <None Remove="Features\Players\Commands\UpdatePlayer\" />
+    <None Remove="Features\Players\Queries\GetAllPlayers\" />
+    <None Remove="Features\Players\Queries\GetPlayerById\" />
+    <None Remove="Features\Players\Queries\GetPlayersByClub\" />
+    <None Remove="Features\Players\Queries\GetPlayersWithPagination\" />
+    <None Remove="Features\Memberships\Commands\RegisterMember\" />
+    <None Remove="Features\Memberships\Commands\ModifyMember\" />
+    <None Remove="Features\Memberships\Commands\DeactivateMember\" />
+    <None Remove="Features\Memberships\Commands\ActivateMember\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Common\Mappings\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Interfaces\Repositories\" />
+    <Folder Include="Features\" />
+    <Folder Include="Features\Memberships\" />
+    <Folder Include="Features\Branches\" />
+    <Folder Include="Features\Provinces\" />
+    <Folder Include="Features\Wards\" />
+    <Folder Include="Features\Branches\Commands\" />
+    <Folder Include="Features\Branches\Queries\" />
+    <Folder Include="Features\Memberships\Commands\" />
+    <Folder Include="Features\Memberships\Queries\" />
+    <Folder Include="Features\Provinces\Commands\" />
+    <Folder Include="Features\Provinces\Queries\" />
+    <Folder Include="Features\Wards\Commands\" />
+    <Folder Include="Features\Wards\Queries\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Features\Players\" />
+    <Folder Include="Features\Players\Commands\" />
+    <Folder Include="Features\Players\Queries\" />
+    <Folder Include="Features\Players\Commands\CreatePlayer\" />
+    <Folder Include="Features\Players\Commands\DeletePlayer\" />
+    <Folder Include="Features\Players\Commands\UpdatePlayer\" />
+    <Folder Include="Features\Players\Queries\GetAllPlayers\" />
+    <Folder Include="Features\Players\Queries\GetPlayerById\" />
+    <Folder Include="Features\Players\Queries\GetPlayersByClub\" />
+    <Folder Include="Features\Players\Queries\GetPlayersWithPagination\" />
+    <Folder Include="Features\Memberships\Commands\RegisterMember\" />
+    <Folder Include="Features\Memberships\Commands\ModifyMember\" />
+    <Folder Include="Features\Memberships\Commands\DeactivateMember\" />
+    <Folder Include="Features\Memberships\Commands\ActivateMember\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.17" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Domain\eMKParty.BackOffice.Support.Domain.csproj" />
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Shared\eMKParty.BackOffice.Support.Shared.csproj" />
+  </ItemGroup>
+</Project>

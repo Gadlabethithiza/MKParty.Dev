@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DbContexts\" />
+    <None Remove="MessageQueues\" />
+    <None Remove="NotificationServices\" />
+    <None Remove="Extensions\" />
+    <None Remove="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DbContexts\" />
+    <Folder Include="MessageQueues\" />
+    <Folder Include="NotificationServices\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Domain\eMKParty.BackOffice.Support.Domain.csproj" />
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Application\eMKParty.BackOffice.Support.Application.csproj" />
+  </ItemGroup>
+</Project>
