@@ -32,7 +32,7 @@ var information = new OpenApiInfo()
 {
     Version = "v1",
     Title = "uMkhonto Wesizwe Secured Basic API",
-    Description = "This is used to fullfil uMkhonto Wesizwe Party day-to-day operations",
+    Description = "Welcome to uMkhonto weSizwe Party, a powerful force dedicated to bringing about positive change and progress in society. As a true liberation movement, we stand for the people, by the people, and with the people.",
     TermsOfService = new Uri("http://www.gcwabetech.co.za"),
     Contact = contact,
     License = license
