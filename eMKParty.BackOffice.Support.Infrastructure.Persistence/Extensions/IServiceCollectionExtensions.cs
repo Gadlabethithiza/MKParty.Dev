@@ -6,6 +6,8 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories;
+using eMKParty.BackOffice.Support.Application.Interfaces;
+using eMKParty.BackOffice.Support.Infrastructure.Services;
 
 namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions
 {
@@ -34,12 +36,14 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions
 
         private static void AddRepositories(this IServiceCollection services)
         {
+            services.AddCors(); //This will allow Angular app to call this api
             services
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 .AddTransient(typeof(IMembershipRepository),typeof(MembershipRepository))
+                .AddTransient(typeof(IAesOperation), typeof(AesOperation))
 
-
+                .AddTransient<ITokenService, TokenService>()
                 .AddTransient<IPlayerRepository, PlayerRepository>()
                 .AddTransient<IClubRepository, ClubRepository>()
                 .AddTransient<IStadiumRepository, StadiumRepository>()

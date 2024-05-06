@@ -1,11 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using eMKParty.BackOffice.Support.Domain.Common;
 
 namespace eMKParty.BackOffice.Support.Domain.Entities
 {
 	public class Asset : BaseAuditableEntity
     {
+        [Key]
         public int id { get; set; }
+
         public int? supplier_id { get; set; } = 0;
         public string name { get; set; }
         public string description { get; set; }

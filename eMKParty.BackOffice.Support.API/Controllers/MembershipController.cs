@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using eMKParty.BackOffice.Support.Application.DTOs;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.DeactivateMember;
+using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.LoginMember;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.ModifyMember;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.RegisterMember;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Queries;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetAllMembers;
 using eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetMembersByBranch;
+using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -88,17 +90,16 @@ namespace eMKParty.BackOffice.Support.API.Controllers
         //}
 
         [HttpPost("Register")]
-        public async Task<ActionResult<Result<int>>> Create(CreateMemberCommand command)
+        public async Task<ActionResult<Result<MemberDto>>> Create(CreateMemberCommand command)
         {
             return await _mediator.Send(command);
         }
 
-        //[HttpPost("login")]
-        //public async Task<ActionResult<Result<int>>> Login(CreateMemberCommand command)
-        //{
-        //    return await _mediator.Send(command);
-        //}
-
+        [HttpPost("Login")]
+        public async Task<ActionResult<Result<UserDto>>> Login(LoginMemberCommand command)
+        {
+            return await _mediator.Send(command);
+        }
 
         [HttpPut("Modify_profile/{id}")]
         public async Task<ActionResult<Result<int>>> Update(int id, UpdateMemberCommand command)
@@ -118,10 +119,9 @@ namespace eMKParty.BackOffice.Support.API.Controllers
         }
 
         [HttpPost("Activate_member_profile/{id}")]
-        public async Task<ActionResult<Result<int>>> Update(CreateMemberCommand command)
+        public async Task<ActionResult<Result<MemberDto>>> Update(CreateMemberCommand command)
         {
             return await _mediator.Send(command);
         }
     }
 }
-

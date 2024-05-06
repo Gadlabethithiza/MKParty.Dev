@@ -25,5 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\eMKParty.BackOffice.Support.Domain\eMKParty.BackOffice.Support.Domain.csproj" />
     <ProjectReference Include="..\eMKParty.BackOffice.Support.Application\eMKParty.BackOffice.Support.Application.csproj" />
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Infrastructure\eMKParty.BackOffice.Support.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

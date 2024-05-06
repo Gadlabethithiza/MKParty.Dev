@@ -7,7 +7,7 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
 {
     public class MemberDto : IMapFrom<MemberRegister>
     {
-        public int id { get; set; }
+        //public int id { get; set; }
         public int? province_id { get; set; }
         public int? branch_id { get; set; }
         public DateTime membership_date { get; set; }
@@ -26,7 +26,7 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
         public string postal_code { get; set; }
         public int? ward_id { get; set; }
         public string region { get; set; }
-        public string subregion { get; set; }
+        public string sub_region { get; set; }
         public string email { get; set; }
         public string tel { get; set; }
         public string mobile { get; set; }
@@ -34,13 +34,22 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
         public Boolean member_in_good_standing { get; set; }
         public string role { get; set; }
         public string username { get; set; }
-        public string PasswordHash { get; set; }
-        public string PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public string security_question { get; set; }
         public string security_answer { get; set; }
-        public string createdby { get; set; }
-        public DateTime createddate { get; set; }
-        public string modifiedby { get; set; }
-        public DateTime modifieddate { get; set; }
+        public string? creationby { get; set; }
+        public DateTime? creationdate { get; set; }
+        public string? updatedby { get; set; }
+        public DateTime? updateddate { get; set; }
+        public string Token { get; set; }
+        public Guid Guid { get; set; }
+    }
+
+    public class UserDto
+    {
+        public string Username { get; set; }
+        public string Token { get; set; }
+        public MemberDto MemberDetail { get; set; }
     }
 }

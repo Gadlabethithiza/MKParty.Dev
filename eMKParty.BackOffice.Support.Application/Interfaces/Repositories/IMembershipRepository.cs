@@ -13,5 +13,7 @@ namespace eMKParty.BackOffice.Support.Application.Interfaces.Repositories
         Task<Result<string>> DeactivateMemberAsync(int Id, string reason);
         Task<List<MemberRegister>> GetMembersByRegionAsync(string region);
         Task<List<MemberRegister>> GetMembersBySubResionAsync(string subresion);
+
+        Task<MemberRegister> GetMembersByUsernameAsync(string username);
     }
 }

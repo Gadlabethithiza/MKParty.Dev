@@ -7,6 +7,7 @@ using eMKParty.BackOffice.Support.Shared;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using AutoMapper;
+using eMKParty.BackOffice.Support.Application.DTOs;
 
 namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
 {
@@ -50,7 +51,17 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
 
         public async Task<List<MemberRegister>> GetMembersBySubResionAsync(string subresion)
         {
-            return await _repository.Entities.Where(x => x.subregion == subresion).ToListAsync();
+            return await _repository.Entities.Where(x => x.sub_region == subresion).ToListAsync();
+        }
+
+        public async Task<List<MemberRegister>> GetMembersByIDNoAsync(string idno)
+        {
+            return await _repository.Entities.Where(x => x.id_no == idno).ToListAsync();
+        }
+
+        public async Task<MemberRegister> GetMembersByUsernameAsync(string username)
+        {
+            return await _repository.Entities.Where(x => x.username == username).SingleOrDefaultAsync();
         }
 
         public async Task<Result<string>> ActivateMemberAsync(int Id)

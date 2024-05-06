@@ -41,6 +41,7 @@
     <None Remove="Features\Memberships\Commands\ModifyMember\" />
     <None Remove="Features\Memberships\Commands\DeactivateMember\" />
     <None Remove="Features\Memberships\Commands\ActivateMember\" />
+    <None Remove="Features\Memberships\Commands\LoginMember\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -77,6 +78,7 @@
     <Folder Include="Features\Memberships\Commands\ModifyMember\" />
     <Folder Include="Features\Memberships\Commands\DeactivateMember\" />
     <Folder Include="Features\Memberships\Commands\ActivateMember\" />
+    <Folder Include="Features\Memberships\Commands\LoginMember\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />

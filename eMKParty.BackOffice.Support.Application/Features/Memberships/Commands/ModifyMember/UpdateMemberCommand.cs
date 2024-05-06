@@ -71,13 +71,13 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                 member.city = command.City;
                 member.postal_code = command.PostalCode;
                 member.region = command.Region;
-                member.subregion = command.SubRegion;
+                member.sub_region = command.SubRegion;
                 member.email = command.Email;//must be encripted
                 member.tel = command.Tel;//must be encripted
                 member.mobile = command.Mobile;//must be encripted
                 member.mobile_use_whatsapp = command.Mobile_use_whatsapp;
-                member.modifieddate = DateTime.Now;
-                member.modifiedby = command.modifiedby;
+                //member.modifieddate = DateTime.Now;
+                //member.modifiedby = command.modifiedby;
 
                 await _unitOfWork.Repository<MemberRegister>().UpdateAsync(member);
                 member.AddDomainEvent(new MemberUpdatedEvent(member));

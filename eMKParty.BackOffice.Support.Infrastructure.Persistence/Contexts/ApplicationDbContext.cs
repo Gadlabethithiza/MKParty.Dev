@@ -6,6 +6,7 @@ using System.Reflection;
 using eMKParty.BackOffice.Support.Domain.Common;
 using eMKParty.BackOffice.Support.Domain.Common.Interfaces;
 using eMKParty.BackOffice.Support.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
 {
@@ -19,7 +20,9 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
             _dispatcher = dispatcher;
         }
 
-        public DbSet<MemberRegister> Memberships => Set<MemberRegister>();
+        public DbSet<MemberRegister> Memberships { get; set; }
+
+        //public DbSet<MemberRegister> Memberships => Set<MemberRegister>();
         public DbSet<Province> Provinces => Set<Province>();
         public DbSet<Branch> Branches => Set<Branch>();
         public DbSet<Branch_Leadership> Branch_Leaderships => Set<Branch_Leadership>();
@@ -38,18 +41,21 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Asset>(entity =>
             {
                 entity.ToTable("assets", "backoffice");
-                entity.Property<int>("id");
-                entity.HasKey("id");
+                //entity.Property<int>("id");
+                //entity.HasKey("id");
             });
 
             modelBuilder.Entity<MemberRegister>(entity =>
             {
                 entity.ToTable("membership", "backoffice");
-                entity.Property<int>("Id");
-                entity.HasKey("Id");
+                //entity.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd(); // <-- This fixed it for me
+                //entity.HasKey(x => x.id);
+                //entity.Property(x => x.id).ValueGeneratedOnAdd();
+                //entity.Property<int>("id");
+                //entity.HasKey("id");
 
 
-                entity.Property(e => e.subregion).HasColumnName("sub_region");
+                //entity.Property(e => e.sub_region).HasColumnName("sub_region");
                 //entity.Property(e => e.updatedby).HasColumnName("modifiedby");
                 //entity.Property(e => e.updateddate).HasColumnName("modifieddate");
 
