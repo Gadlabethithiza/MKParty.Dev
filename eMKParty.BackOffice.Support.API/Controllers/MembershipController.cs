@@ -54,16 +54,16 @@ namespace eMKParty.BackOffice.Support.API.Controllers
 
         [HttpGet]
         [Route("FindByRegion/{name}")]
-        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByRegionAsync(string region)
+        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByRegionAsync(string name)
         {
-            return await _mediator.Send(new GetMembersByRegionQuery(region));
+            return await _mediator.Send(new GetMembersByRegionQuery(name));
         }
 
         [HttpGet]
         [Route("FindBySubregion/{name}")]
-        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersBySubResionAsync(string sub_region)
+        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersBySubResionAsync(string name)
         {
-            return await _mediator.Send(new GetMembersBySubRegionQuery(sub_region));
+            return await _mediator.Send(new GetMembersBySubRegionQuery(name));
         }
 
 
