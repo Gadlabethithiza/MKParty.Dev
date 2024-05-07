@@ -22,20 +22,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         public string Password { get; set; }
     }
 
-
     internal class CreateMemberCommandHandler : IRequestHandler<LoginMemberCommand, Result<UserDto>>
     {
-        //private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IAesOperation _securityService;
         private readonly IMembershipRepository _memberRepository;
-
         //private string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
         public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IAesOperation securityService, IMapper mapper)
         {
-            //_unitOfWork = unitOfWork;
             _tokenService = tokenService;
             _securityService = securityService;
             _memberRepository = membershipRepository;

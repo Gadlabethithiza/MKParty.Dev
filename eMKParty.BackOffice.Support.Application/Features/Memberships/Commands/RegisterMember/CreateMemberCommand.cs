@@ -13,6 +13,8 @@ using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.RegisterMember
@@ -56,27 +58,35 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IAesOperation _securityService;
-        private string key = "b14ca5898a4e4133bbce2ea2315a1916";
         private readonly ILogger _logger;
+        private readonly IConfiguration config;
+        private readonly string key = "testdata";//"b14ca5898a4e4133bbce2ea2315a1916";
 
-        public CreateMemberCommandHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IAesOperation securityService, IMapper mapper, ILogger<CreateMemberCommandHandler> logger)
+        public CreateMemberCommandHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IAesOperation securityService, IConfiguration _config, IMapper mapper, ILogger<CreateMemberCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _tokenService = tokenService;
             _securityService = securityService;
             _mapper = mapper;
             _logger = logger;
+            config = _config;
+            key = config["SecurityKey"];
         }
 
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand command, CancellationToken cancellationToken)
         {
+            //string key = config["SecurityKey"];
 
             if (!string.IsNullOrWhiteSpace(command.id_no))
                 if (await UserExist(command.id_no)) return await Result<MemberDto>.SuccessAsync(null, "South African ID No is already registered.");
 
-            if(!string.IsNullOrWhiteSpace(command.email))
+            _logger.LogInformation($"Passed ID Number", DateTime.UtcNow.ToLongTimeString());
+
+
+            if (!string.IsNullOrWhiteSpace(command.email))
                 if (await EmailExist(command.email)) return await Result<MemberDto>.SuccessAsync(null, "Membership Email address is already taken.");
 
+            _logger.LogInformation($"Passed email verification", DateTime.UtcNow.ToLongTimeString());
 
             try
             {
@@ -108,13 +118,11 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     mobile = _securityService.EncryptString(key, command.mobile),//must be encripted
                     mobile_use_whatsapp = command.mobile_use_whatsapp,
                     role = command.role,
-                    username = command.id_no,//must be encripted
+                    username = _securityService.EncryptString(key, command.id_no),//must be encripted
                     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("555-admin")),
                     PasswordSalt = hmac.Key,
                     security_question = command.security_question,
                     security_answer = command.security_answer,
-
-
                     creationdate = DateTime.Now,
                     updateddate = DateTime.Now,
                     creationby = "Portal Administrator",
@@ -125,9 +133,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                 await _unitOfWork.Repository<MemberRegister>().AddAsync(member);
                 member.AddDomainEvent(new MemberCreatedEvent(member));
 
-
                 await _unitOfWork.Save(cancellationToken);
-
 
                 MemberDto member_item = new MemberDto
                 {
@@ -148,7 +154,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         {
             bool returnValu = false;
 
-            if(await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.username == username).ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync() != null)            
+            if(await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.username == _securityService.EncryptString(key, username)).ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync() != null)            
                 returnValu = true;            
 
             return returnValu;
