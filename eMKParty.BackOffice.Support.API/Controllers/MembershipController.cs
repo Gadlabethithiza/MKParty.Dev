@@ -13,12 +13,14 @@ using eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetMe
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace eMKParty.BackOffice.Support.API.Controllers
 {
+    [Authorize]
     public class MembershipController : ApiControllerBase
     {
         private readonly IMediator _mediator;
@@ -68,27 +70,6 @@ namespace eMKParty.BackOffice.Support.API.Controllers
             return await _mediator.Send(new GetMembersBySubRegionQuery(name));
         }
 
-
-
-
-        //[HttpGet]
-        //[Route("paged")]
-        //public async Task<ActionResult<PaginatedResult<GetPlayersWithPaginationDto>>> GetPlayersWithPagination([FromQuery] GetPlayersWithPaginationQuery query)
-        //{
-        //    var validator = new GetPlayersWithPaginationValidator();
-
-        //    // Call Validate or ValidateAsync and pass the object which needs to be validated
-        //    var result = validator.Validate(query);
-
-        //    if (result.IsValid)
-        //    {
-        //        return await _mediator.Send(query);
-        //    }
-
-        //    var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
-        //    return BadRequest(errorMessages);
-        //}
-
         [HttpPost("Register")]
         public async Task<ActionResult<Result<MemberDto>>> Create(CreateMemberCommand command)
         {
@@ -123,5 +104,23 @@ namespace eMKParty.BackOffice.Support.API.Controllers
         {
             return await _mediator.Send(command);
         }
+
+        //[HttpGet]
+        //[Route("paged")]
+        //public async Task<ActionResult<PaginatedResult<GetPlayersWithPaginationDto>>> GetPlayersWithPagination([FromQuery] GetPlayersWithPaginationQuery query)
+        //{
+        //    var validator = new GetPlayersWithPaginationValidator();
+
+        //    // Call Validate or ValidateAsync and pass the object which needs to be validated
+        //    var result = validator.Validate(query);
+
+        //    if (result.IsValid)
+        //    {
+        //        return await _mediator.Send(query);
+        //    }
+
+        //    var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+        //    return BadRequest(errorMessages);
+        //}
     }
 }
