@@ -8,7 +8,7 @@ namespace eMKParty.BackOffice.Support.Domain.Entities
 {
 	public class MemberRegister : BaseAuditableEntity
     {
-         public int? province_id { get; set; }
+        public int? province_id { get; set; }
         public int? branch_id { get; set; }
         public int? ward_id { get; set; }
         public DateTime membership_date { get; set; }

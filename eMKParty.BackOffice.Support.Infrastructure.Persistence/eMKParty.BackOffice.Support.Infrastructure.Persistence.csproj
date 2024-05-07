@@ -16,11 +16,13 @@
     <None Remove="Contexts\" />
     <None Remove="Extensions\" />
     <None Remove="Repositories\" />
+    <None Remove="Configurations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contexts\" />
     <Folder Include="Extensions\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Configurations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eMKParty.BackOffice.Support.Domain\eMKParty.BackOffice.Support.Domain.csproj" />

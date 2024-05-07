@@ -22,9 +22,7 @@
     <None Remove="Features\Branches\Queries\" />
     <None Remove="Features\Memberships\Commands\" />
     <None Remove="Features\Memberships\Queries\" />
-    <None Remove="Features\Provinces\Commands\" />
     <None Remove="Features\Provinces\Queries\" />
-    <None Remove="Features\Wards\Commands\" />
     <None Remove="Features\Wards\Queries\" />
     <None Remove="Extensions\" />
     <None Remove="Features\Players\" />
@@ -42,6 +40,10 @@
     <None Remove="Features\Memberships\Commands\DeactivateMember\" />
     <None Remove="Features\Memberships\Commands\ActivateMember\" />
     <None Remove="Features\Memberships\Commands\LoginMember\" />
+    <None Remove="Features\Municipalities\" />
+    <None Remove="Features\VotingStations\" />
+    <None Remove="Features\Municipalities\Queries\" />
+    <None Remove="Features\VotingStations\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -59,9 +61,7 @@
     <Folder Include="Features\Branches\Queries\" />
     <Folder Include="Features\Memberships\Commands\" />
     <Folder Include="Features\Memberships\Queries\" />
-    <Folder Include="Features\Provinces\Commands\" />
     <Folder Include="Features\Provinces\Queries\" />
-    <Folder Include="Features\Wards\Commands\" />
     <Folder Include="Features\Wards\Queries\" />
     <Folder Include="Extensions\" />
     <Folder Include="Features\Players\" />
@@ -79,6 +79,10 @@
     <Folder Include="Features\Memberships\Commands\DeactivateMember\" />
     <Folder Include="Features\Memberships\Commands\ActivateMember\" />
     <Folder Include="Features\Memberships\Commands\LoginMember\" />
+    <Folder Include="Features\Municipalities\" />
+    <Folder Include="Features\VotingStations\" />
+    <Folder Include="Features\Municipalities\Queries\" />
+    <Folder Include="Features\VotingStations\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />

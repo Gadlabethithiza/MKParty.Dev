@@ -1,12 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Numerics;
-using eMKParty.BackOffice.Support.Domain.Common;
+using eMKParty.BackOffice.Support.Application.Common.Mappings;
+using eMKParty.BackOffice.Support.Domain.Entities;
 
-namespace eMKParty.BackOffice.Support.Domain.Entities
+namespace eMKParty.BackOffice.Support.Application.Features.Provinces.Queries
 {
-	public class Province : BaseAuditableEntity
-	{
+    public class ProvinceDto : IMapFrom<Province>
+    {
         public int Province_ID { get; set; }
         public string? ProvinceCode { get; set; }
         public string? ProvinceDesc { get; set; }

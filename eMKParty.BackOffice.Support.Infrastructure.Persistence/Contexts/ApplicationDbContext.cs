@@ -7,6 +7,8 @@ using eMKParty.BackOffice.Support.Domain.Common;
 using eMKParty.BackOffice.Support.Domain.Common.Interfaces;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Reflection.Metadata;
+using System.Data;
 
 namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
 {
@@ -21,9 +23,12 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
         }
 
         public DbSet<MemberRegister> Memberships { get; set; }
-
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<Municipality> Municipalities { get; set; }
+        public DbSet<VotingStation> VotingStations { get; set; }
+        public DbSet<Ward> Wards { get; set; }
         //public DbSet<MemberRegister> Memberships => Set<MemberRegister>();
-        public DbSet<Province> Provinces => Set<Province>();
+        //public DbSet<Province> Provinces => Set<Province>();
         public DbSet<Branch> Branches => Set<Branch>();
         public DbSet<Branch_Leadership> Branch_Leaderships => Set<Branch_Leadership>();
         public DbSet<Branch_Ward> Branch_Wards => Set<Branch_Ward>();
@@ -37,6 +42,50 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+
+            modelBuilder.Entity<Province>(entity =>
+            {
+                entity.ToTable("lst_Province", "support");
+                entity.Property<int>("Province_ID");
+                entity.HasKey("Province_ID");
+            });
+
+            //modelBuilder.Entity<Municipality>().ToTable("lst_Municipality", "support");
+            //modelBuilder.Entity<Municipality>()
+            //    .HasOne(p => p.Province)
+            //            .WithMany(b => b.Municipalities)
+            //            .HasForeignKey(p => p.FkProvince_ID);
+
+            modelBuilder.Entity<Municipality>(entity =>
+            {
+                entity.ToTable("lst_Municipality", "support");
+                entity.Property<int>("Municipality_ID");
+                entity.HasKey("Municipality_ID");
+                entity.Property(e => e.MunicipalityName).HasColumnName("Municipality");
+                entity.Property(e => e.FkProvince_ID).HasColumnName("FkProvince_ID");
+                //entity.WithOne(e => e.Blog)
+
+            });
+
+            //modelBuilder.Entity<Municipality>()
+            //  .HasOne(p => p.Province)
+            //  .WithOne()
+            //  //.WithMany(b => b.Municipalities)
+            //  .HasForeignKey(p => p.);
+
+            modelBuilder.Entity<VotingStation>(entity =>
+            {
+                entity.ToTable("lst_VotingStation", "support");
+                entity.Property<int>("VotingStation_ID");
+                entity.HasKey("VotingStation_ID");
+            });
+
+            modelBuilder.Entity<Ward>(entity =>
+            {
+                entity.ToTable("lst_Ward", "support");
+                entity.Property<int>("Ward_ID");
+                entity.HasKey("Ward_ID");
+            });
 
             modelBuilder.Entity<Asset>(entity =>
             {

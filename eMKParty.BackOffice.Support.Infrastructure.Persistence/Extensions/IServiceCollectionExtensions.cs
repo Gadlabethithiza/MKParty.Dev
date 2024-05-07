@@ -41,13 +41,18 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions
                 .AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>))
                 .AddTransient(typeof(IMembershipRepository),typeof(MembershipRepository))
-                .AddTransient(typeof(IAesOperation), typeof(AesOperation))
+                .AddTransient(typeof(IMunicipalityRepository), typeof(MunicipalityRepository))
+
+                .AddTransient(typeof(IProvinceRepository), typeof(ProvinceRepository)) 
+
 
                 .AddTransient<ITokenService, TokenService>()
                 .AddTransient<IPlayerRepository, PlayerRepository>()
                 .AddTransient<IClubRepository, ClubRepository>()
                 .AddTransient<IStadiumRepository, StadiumRepository>()
                 .AddTransient<ICountryRepository, CountryRepository>();
+            //.AddTransient(typeof(IAesOperation), typeof(AesOperation))
+
         }
     }
 }
