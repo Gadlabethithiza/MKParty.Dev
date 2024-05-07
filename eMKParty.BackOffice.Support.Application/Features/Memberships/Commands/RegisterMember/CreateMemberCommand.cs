@@ -60,7 +60,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         private readonly IAesOperation _securityService;
         private readonly ILogger _logger;
         private readonly IConfiguration config;
-        private readonly string key = "testdata";//"b14ca5898a4e4133bbce2ea2315a1916";
+        //private readonly string key = "testdata";//"b14ca5898a4e4133bbce2ea2315a1916";
 
         public CreateMemberCommandHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IAesOperation securityService, IConfiguration _config, IMapper mapper, ILogger<CreateMemberCommandHandler> logger)
         {
@@ -70,13 +70,10 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
             _mapper = mapper;
             _logger = logger;
             config = _config;
-            key = config["SecurityKey"];
         }
 
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand command, CancellationToken cancellationToken)
         {
-            //string key = config["SecurityKey"];
-
             if (!string.IsNullOrWhiteSpace(command.id_no))
                 if (await UserExist(command.id_no)) return await Result<MemberDto>.SuccessAsync(null, "South African ID No is already registered.");
 
@@ -104,7 +101,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     membership_date = command.membership_date,
                     membership_card_required = command.membership_card_required,
                     membership_card_printed = command.membership_card_printed,
-                    id_no = _securityService.EncryptString(key, command.id_no), //must be encripted
+                    id_no = _securityService.EncryptString(config["SecurityKey"], command.id_no), //must be encripted
                     gender = command.gender,
                     prefered_lang = command.prefered_lang,
                     building_site_no = command.building_site_no,
@@ -115,10 +112,10 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     sub_region = command.subregion,
                     email = command.email,//must be encripted
                     tel = command.tel,//must be encripted
-                    mobile = _securityService.EncryptString(key, command.mobile),//must be encripted
+                    mobile = _securityService.EncryptString(config["SecurityKey"], command.mobile),//must be encripted
                     mobile_use_whatsapp = command.mobile_use_whatsapp,
                     role = command.role,
-                    username = _securityService.EncryptString(key, command.id_no),//must be encripted
+                    username = _securityService.EncryptString(config["SecurityKey"], command.id_no),//must be encripted
                     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("555-admin")),
                     PasswordSalt = hmac.Key,
                     security_question = command.security_question,

@@ -13,6 +13,8 @@ using MediatR;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.LoginMember
 {
@@ -29,20 +31,22 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         private readonly IAesOperation _securityService;
         private readonly IMembershipRepository _memberRepository;
         //private string key = "b14ca5898a4e4133bbce2ea2315a1916";
+        private readonly IConfiguration config;
 
-        public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IAesOperation securityService, IMapper mapper)
+        public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper)
         {
             _tokenService = tokenService;
             _securityService = securityService;
             _memberRepository = membershipRepository;
             _mapper = mapper;
+            config = _config;
         }
 
         public async Task<Result<UserDto>> Handle(LoginMemberCommand command, CancellationToken cancellationToken)
         {
-            var user = await _memberRepository.GetMembersByUsernameAsync(command.Username);
+            var user = await _memberRepository.GetMembersByUsernameAsync(_securityService.EncryptString(config["SecurityKey"], command.Username));
 
-            if (user == null) return await Result<UserDto>.FailureAsync(null, "Invalid Username");
+            if (user == null) return await Result<UserDto>.FailureAsync(null, "Invalid Login Details");
 
             using var hmac = new HMACSHA512(user.PasswordSalt); //for un-Hashing Password stored on the datbase
 
@@ -50,12 +54,12 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
 
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if (computedHash[i] != user.PasswordHash[i]) return await Result<UserDto>.FailureAsync(null, "Invalid Password");
+                if (computedHash[i] != user.PasswordHash[i]) return await Result<UserDto>.FailureAsync(null, "Invalid Login Details");
             }
 
             UserDto member_item = new UserDto
             {
-                Username = user.username,
+                Username = _securityService.DecryptString(config["SecurityKey"], user.username),
                 Token = _tokenService.CreateToken(user)
             };
 
