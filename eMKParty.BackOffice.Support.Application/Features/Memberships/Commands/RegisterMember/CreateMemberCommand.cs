@@ -151,7 +151,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         {
             bool returnValu = false;
 
-            if(await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.username == _securityService.EncryptString(key, username)).ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync() != null)            
+            if(await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.username == _securityService.EncryptString(config["SecurityKey"], username)).ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync() != null)            
                 returnValu = true;            
 
             return returnValu;
