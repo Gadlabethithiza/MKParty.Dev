@@ -11,9 +11,17 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
 	public class ProvinceRepository : IProvinceRepository
     {
         //private readonly IGenericRepository<Province> _repository;
-        private readonly ApplicationDbContext _dbContext;
+        //private readonly ApplicationDbContext _dbContext;
 
-        public ProvinceRepository(IGenericRepository<Province> repository, ApplicationDbContext dbContext)
+        //public ProvinceRepository(IGenericRepository<Province> repository, ApplicationDbContext dbContext)
+        //{
+        //    //_repository = repository;
+        //    _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        //}
+
+
+        private readonly ApplicationMySqlDbContext _dbContext;
+        public ProvinceRepository(IGenericRepository<Province> repository, ApplicationMySqlDbContext dbContext)
         {
             //_repository = repository;
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));

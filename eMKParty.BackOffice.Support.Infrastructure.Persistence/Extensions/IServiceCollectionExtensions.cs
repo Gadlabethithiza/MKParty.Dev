@@ -20,19 +20,21 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions
             services.AddRepositories();
         }
 
-        //private static void AddMappings(this IServiceCollection services)
-        //{
-        //    services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        //}
-
         public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            //var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(connectionString,
-                   builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+               builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            //var connectionString = configuration.GetSection("ConnectionStrings")["DefaultMKPartyMySqlConnection"];
+
+            services.AddDbContext<ApplicationMySqlDbContext>(options =>
+               options.UseMySQL(configuration.GetConnectionString("DefaultMKPartyMySqlConnection").ToString(),
+               builder => builder.MigrationsAssembly(typeof(ApplicationMySqlDbContext).Assembly.FullName)));
         }
+
 
         private static void AddRepositories(this IServiceCollection services)
         {
@@ -43,8 +45,8 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions
                 .AddTransient(typeof(IMembershipRepository),typeof(MembershipRepository))
                 .AddTransient(typeof(IMunicipalityRepository), typeof(MunicipalityRepository))
 
-                .AddTransient(typeof(IProvinceRepository), typeof(ProvinceRepository)) 
-
+                .AddTransient(typeof(IProvinceRepository), typeof(ProvinceRepository))
+                .AddTransient(typeof(IConfigurationRepository), typeof(ConfigurationRepository))
 
                 .AddTransient<ITokenService, TokenService>()
                 .AddTransient<IPlayerRepository, PlayerRepository>()

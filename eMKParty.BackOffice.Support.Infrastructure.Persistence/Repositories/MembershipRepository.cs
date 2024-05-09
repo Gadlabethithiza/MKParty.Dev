@@ -29,19 +29,19 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
             _repository = repository;
         }
 
-        public async Task<List<MemberRegister>> GetMembersByBranchAsync(int branchId)
+        public async Task<List<MemberRegister>> GetMembersByBranchAsync(string branch)
         {
-            return await _repository.Entities.Where(x => x.branch_id == branchId).ToListAsync();
+            return await _repository.Entities.Where(x => x.branch_name == branch).ToListAsync();
         }
 
-        public async Task<List<MemberRegister>> GetMembersByProvinceAsync(int province_id)
+        public async Task<List<MemberRegister>> GetMembersByProvinceAsync(string province)
         {
-            return await _repository.Entities.Where(x => x.province_id == province_id).ToListAsync();
+            return await _repository.Entities.Where(x => x.province_name == province).ToListAsync();
         }
 
-        public async Task<List<MemberRegister>> GetMembersByWardAsync(int ward_id)
+        public async Task<List<MemberRegister>> GetMembersByWardAsync(string ward)
         {
-            return await _repository.Entities.Where(x => x.ward_id == ward_id).ToListAsync();
+            return await _repository.Entities.Where(x => x.ward_name == ward).ToListAsync();
         }
 
         public async Task<List<MemberRegister>> GetMembersByRegionAsync(string region)

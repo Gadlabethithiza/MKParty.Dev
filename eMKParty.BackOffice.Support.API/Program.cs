@@ -7,8 +7,7 @@ using Serilog;
 
 try
 {
-
-
+    Log.Information("starting server.");
     var builder = WebApplication.CreateBuilder(args);
 
     //var logger = new LoggerConfiguration()
@@ -99,5 +98,9 @@ try
 }
 catch (Exception ex)
 {
-
+    Log.Fatal(ex, "server terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
 }

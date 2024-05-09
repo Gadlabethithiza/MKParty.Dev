@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<base href="~/">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"]</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap_sandstone.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
+
+    @*<link rel="stylesheet" href="~/lib/themes/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">*@
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/themes/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css")" media="screen">
+
+    <!-- Font Awesome -->
+    @*<link rel="stylesheet" href="~/lib/themes/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">*@
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/themes/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css")" media="screen">
+
+    <!-- Ionicons -->
+    @*<link rel="stylesheet" href="~/lib/themes/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">*@
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/themes/AdminLTE/bower_components/Ionicons/css/ionicons.min.css")" media="screen">
+
+    <!-- Theme style -->
+    @*<link rel="stylesheet" href="~/lib/themes/AdminLTE/dist/css/AdminLTE.min.css">*@
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/themes/AdminLTE/dist/css/AdminLTE.min.css")" media="screen">
+
+    @*<link rel="stylesheet" href="~/lib/themes/AdminLTE/dist/css/skins/skin-blue.min.css">*@
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/lib/themes/AdminLTE/dist/css/skins/skin-blue.min.css")" media="screen">
+
+    <!-- jQuery 3 -->
+    <script src="~/lib/themes/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+    @*<script rel="stylesheet" type="text/css" src="@Url.Content("~/lib/themes/AdminLTE/dist/css/skins/skin-blue.min.css")" media="screen" />*@
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                @*<span class="logo-mini"><b>M</b>K</span>
+        <span class="logo-mini"><b>M</b>K</span>*@
+                <span class="logo-mini"><img src="~/lib/themes/AdminLTE/dist/img/uMkhonto-Wesizwe-logo.png" width="50px" height="50px" class="img-circle" alt="User Image"></span>
+
+                <!-- logo for regular state and mobile devices -->
+                @*<span class="logo-lg"><b>AdminPanel</b>Tutorial</span>*@
+                <span class="logo-lg"><img src="~/lib/themes/AdminLTE/dist/img/uMkhonto-Wesizwe-logo.png" width="50px" height="50px" class="img-circle" alt="User Image"></span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span> 
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="~/lib/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">Shehryar khan</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                @*<li class="user-header">
+                                    <img src="~/lib/themes/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        Shehryar khan - Coding Infinite
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>*@
+                                <!-- Menu Body -->
+                                @*<li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Account</a>
+                                        </div>
+                                    </div>
+                                </li>*@
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">My Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                @*<div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="~/lib/themes/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>Shehryar Khan</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                </div>*@
+                <!-- search form (Optional) -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- Sidebar Menu -->
+                @Html.Partial("_MainMenu")
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="container-fluid content-wrapper">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- Default to the left -->
+            <strong>Copyright © 2023 <a href="https://gcwabetech.co.za/">Gcwabe Tech Resources</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/lib/themes/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/themes/AdminLTE/dist/js/adminlte.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

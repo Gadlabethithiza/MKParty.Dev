@@ -15,14 +15,14 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.G
 {
 	public class GetAllMembersByBranchQuery : IRequest<Result<List<MemberDto>>>
     {
-        public int branch_id { get; set; }
+        public string branch_id { get; set; }
 
         public GetAllMembersByBranchQuery()
         {
 
         }
 
-        public GetAllMembersByBranchQuery(int id)
+        public GetAllMembersByBranchQuery(string id)
         {
             branch_id = id;
         }
@@ -61,10 +61,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.G
                     citem.Guid = item.Guid;
                     citem.name = item.name;
                     citem.surname = item.surname;
-                    citem.province_id = item.province_id;
+                    citem.province_name = item.province_name;
                     citem.BirthDate = item.BirthDate;
-                    citem.branch_id = item.branch_id;
-                    citem.ward_id = item.ward_id;
+                    citem.branch_name = item.branch_name;
+                    citem.ward_name = item.ward_name;
+                    citem.municipality_name = item.municipality_name;
+
+                    citem.race = item.race;
+                    citem.occupation = item.occupation;
+                    citem.employment_status = item.employment_status;
+
                     citem.membership_no = item.membership_no;
                     citem.membership_date = item.membership_date;
                     citem.membership_card_required = item.membership_card_required;

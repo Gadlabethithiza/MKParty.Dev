@@ -8,9 +8,16 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseAuditableEntity
     {
-        private readonly ApplicationDbContext _dbContext;
+        //private readonly ApplicationDbContext _dbContext;
 
-        public GenericRepository(ApplicationDbContext dbContext)
+        //public GenericRepository(ApplicationDbContext dbContext)
+        //{
+        //    _dbContext = dbContext;
+        //}
+
+        private readonly ApplicationMySqlDbContext _dbContext;
+
+        public GenericRepository(ApplicationMySqlDbContext dbContext)
         {
             _dbContext = dbContext;
         }

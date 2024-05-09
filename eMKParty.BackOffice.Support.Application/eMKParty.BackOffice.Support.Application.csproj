@@ -44,6 +44,8 @@
     <None Remove="Features\VotingStations\" />
     <None Remove="Features\Municipalities\Queries\" />
     <None Remove="Features\VotingStations\Queries\" />
+    <None Remove="Features\Configurations\" />
+    <None Remove="Features\Configurations\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -83,6 +85,8 @@
     <Folder Include="Features\VotingStations\" />
     <Folder Include="Features\Municipalities\Queries\" />
     <Folder Include="Features\VotingStations\Queries\" />
+    <Folder Include="Features\Configurations\" />
+    <Folder Include="Features\Configurations\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />

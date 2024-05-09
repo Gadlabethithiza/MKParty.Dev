@@ -50,12 +50,17 @@ namespace eMKParty.BackOffice.Support.Application.Features.Provinces.Queries
 
         public async Task<Result<ProvinceDto>> Handle(GetAllProvinceByIdQuery query, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("GetAllProvinceByIdQueryHandler()");
+            //_logger.LogInformation("GetAllProvinceByIdQueryHandler()");
 
-            var provinces = await _unitOfWork.Repository<Province>().Entities
-                    .ProjectTo<ProvinceDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync(cancellationToken);
-            var province = provinces.Where(x => x.Id == query.Id).SingleOrDefault();
+            //var provinces = await _unitOfWork.Repository<Province>().Entities
+            //        .ProjectTo<ProvinceDto>(_mapper.ConfigurationProvider)
+            //        .ToListAsync(cancellationToken);
+            //var province = provinces.Where(x => x.Id == query.Id).SingleOrDefault();
+            //return await Result<ProvinceDto>.SuccessAsync(province);
+
+
+            var entity = await _unitOfWork.Repository<Province>().GetByIdAsync(query.Id);
+            var province = _mapper.Map<ProvinceDto>(entity);
             return await Result<ProvinceDto>.SuccessAsync(province);
         }
     }

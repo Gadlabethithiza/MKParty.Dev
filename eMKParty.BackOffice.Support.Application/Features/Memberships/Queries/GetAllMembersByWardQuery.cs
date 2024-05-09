@@ -12,16 +12,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
 {
 	public class GetAllMembersByWardQuery : IRequest<Result<List<MemberDto>>>
     {
-        public int WardId { get; set; }
+        public string Ward { get; set; }
 
         public GetAllMembersByWardQuery()
         {
 
         }
 
-        public GetAllMembersByWardQuery(int id)
+        public GetAllMembersByWardQuery(string id)
         {
-            WardId = id;
+            Ward = id;
         }
     }
 
@@ -47,7 +47,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
         public async Task<Result<List<MemberDto>>> Handle(GetAllMembersByWardQuery query, CancellationToken cancellationToken)
         {
             List<MemberDto> memberLs = new List<MemberDto>();
-            var entities = await _memberRepository.GetMembersByWardAsync(query.WardId);
+            var entities = await _memberRepository.GetMembersByWardAsync(query.Ward);
             var members = _mapper.Map<List<MemberDto>>(entities);
 
 
@@ -59,10 +59,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
                     citem.Guid = item.Guid;
                     citem.name = item.name;
                     citem.surname = item.surname;
-                    citem.province_id = item.province_id;
+
+                    citem.province_name = item.province_name;
                     citem.BirthDate = item.BirthDate;
-                    citem.branch_id = item.branch_id;
-                    citem.ward_id = item.ward_id;
+                    citem.branch_name = item.branch_name;
+                    citem.ward_name = item.ward_name;
+                    citem.municipality_name = item.municipality_name;
+                    citem.race = item.race;
+                    citem.occupation = item.occupation;
+                    citem.employment_status = item.employment_status;
+
                     citem.membership_no = item.membership_no;
                     citem.membership_date = item.membership_date;
                     citem.membership_card_required = item.membership_card_required;

@@ -37,23 +37,23 @@ namespace eMKParty.BackOffice.Support.API.Controllers
         }
 
         [HttpGet("FindByBranch/{branchId}")]
-        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByBranch(int branchId)
+        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByBranch(string branch)
         {
-            return await _mediator.Send(new GetAllMembersByBranchQuery(branchId));
+            return await _mediator.Send(new GetAllMembersByBranchQuery(branch));
         }
 
         [HttpGet]
         [Route("FindByProvince/{provinceId}")]
-        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByProvince(int provinceId)
+        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByProvince(string province)
         {
-            return await _mediator.Send(new GetAllMembersByProvinceQuery(provinceId));
+            return await _mediator.Send(new GetAllMembersByProvinceQuery(province));
         }
 
         [HttpGet]
         [Route("FindByWard/{wardId}")]
-        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByWard(int wardId)
+        public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByWard(string ward)
         {
-            return await _mediator.Send(new GetAllMembersByWardQuery(wardId));
+            return await _mediator.Send(new GetAllMembersByWardQuery(ward));
         }
 
         [HttpGet]

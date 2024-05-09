@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Reflection;
+using System.Security.Policy;
 using System.Xml.Linq;
 using AutoMapper;
 using eMKParty.BackOffice.Support.Application.Features.Players.Commands.UpdatePlayer;
@@ -20,12 +21,18 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int ProvinceId { get; set; }
-        public int? BranchId { get; set; }
-        public int? WardId { get; set; }
+        public string? province_name { get; set; }
+        public string? branch_name { get; set; }
+        public string? ward_name { get; set; }
+        public string? municipality_name { get; set; }
         public DateTime MembershipDate { get; set; }
         public Boolean? MembershipCardRequired { get; set; }
         public Boolean? MembershipCardPrinted { get; set; }
+
+        public string? employment_status { get; set; }
+        public string? occupation { get; set; }
+        public string race { get; set; }
+
         public string Gender { get; set; }
         public string PreferedLang { get; set; }
         public string BuildingSiteNo { get; set; }
@@ -61,10 +68,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
             {
                 member.name = command.Name;
                 member.surname = command.Surname;
-                member.province_id = command.ProvinceId;
+                member.province_name = command.province_name;
                 member.BirthDate = command.BirthDate;
-                member.branch_id = command.BranchId;
-                member.ward_id = command.WardId;
+                member.branch_name = command.branch_name;
+                member.ward_name = command.ward_name;
+                member.municipality_name = command.municipality_name;
+
+                member.race = command.race;
+                member.occupation = command.occupation;
+                member.employment_status = command.employment_status;
+
                 member.membership_date = command.MembershipDate;
                 member.membership_card_required = command.MembershipCardRequired;
                 member.membership_card_printed = command.MembershipCardPrinted;

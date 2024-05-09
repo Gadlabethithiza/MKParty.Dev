@@ -8,11 +8,17 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
 {
 	public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _dbContext;
+        //private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationMySqlDbContext _dbContext;
         private Hashtable _repositories;
         private bool disposed;
 
-        public UnitOfWork(ApplicationDbContext dbContext)
+        //public UnitOfWork(ApplicationDbContext dbContext)
+        //{
+        //    _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        //}
+
+        public UnitOfWork(ApplicationMySqlDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
