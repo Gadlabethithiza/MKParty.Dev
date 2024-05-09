@@ -1,11 +1,13 @@
 ﻿using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using eMKParty.BackOffice.Support.Application.Features.Provinces.Queries;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Wards.Queries
 {
@@ -15,11 +17,13 @@ namespace eMKParty.BackOffice.Support.Application.Features.Wards.Queries
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<GetAllWardsQueryHandler> _logger;
 
-        public GetAllWardsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetAllWardsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<GetAllWardsQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Result<List<WardDto>>> Handle(GetAllWardsQuery query, CancellationToken cancellationToken)

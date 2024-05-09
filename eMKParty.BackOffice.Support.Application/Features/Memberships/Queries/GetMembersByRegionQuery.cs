@@ -1,11 +1,13 @@
 ﻿using System;
 using AutoMapper;
 using eMKParty.BackOffice.Support.Application.DTOs;
+using eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetAllMembers;
 using eMKParty.BackOffice.Support.Application.Interfaces;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
 {
@@ -31,14 +33,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
         private readonly IMapper _mapper;
         private readonly IConfiguration config;
         private readonly IAesOperation _securityService;
+        private readonly ILogger<GetMembersByRegionQueryHandler> _logger;
 
-        public GetMembersByRegionQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper)
+        public GetMembersByRegionQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<GetMembersByRegionQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _memberRepository = membershipRepository;
             _mapper = mapper;
             config = _config;
             _securityService = securityService;
+            _logger = logger;
         }
 
         public async Task<Result<List<MemberDto>>> Handle(GetMembersByRegionQuery query, CancellationToken cancellationToken)

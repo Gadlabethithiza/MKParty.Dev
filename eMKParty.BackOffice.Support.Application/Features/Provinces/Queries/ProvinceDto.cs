@@ -6,7 +6,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Provinces.Queries
 {
     public class ProvinceDto : IMapFrom<Province>
     {
-        public int Province_ID { get; set; }
+        public int Id { get; set; }
         public string? ProvinceCode { get; set; }
         public string? ProvinceDesc { get; set; }
         public string? createdby { get; set; }

@@ -7,7 +7,7 @@ namespace eMKParty.BackOffice.Support.Domain.Entities
     {
         public int Ward_ID { get; set; }
         public string? WardCode { get; set; }
-        public string? FkMunicipality_ID { get; set; }
+        public int? FkMunicipality_ID { get; set; }
         public int? FkProvince_ID { get; set; }
         public string? createdby { get; set; }
         public DateTime? createddate { get; set; }

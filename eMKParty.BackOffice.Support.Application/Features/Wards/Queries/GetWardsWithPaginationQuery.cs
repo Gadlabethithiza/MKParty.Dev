@@ -7,6 +7,7 @@ using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Wards.Queries
 {
@@ -28,11 +29,13 @@ namespace eMKParty.BackOffice.Support.Application.Features.Wards.Queries
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<GetWardsWithPaginationQueryHandler> _logger;
 
-        public GetWardsWithPaginationQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetWardsWithPaginationQueryHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<GetWardsWithPaginationQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<PaginatedResult<WardDto>> Handle(GetWardsWithPaginationQuery query, CancellationToken cancellationToken)

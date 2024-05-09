@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.LoginMember
 {
@@ -30,16 +31,18 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         private readonly ITokenService _tokenService;
         private readonly IAesOperation _securityService;
         private readonly IMembershipRepository _memberRepository;
+        private readonly ILogger _logger;
         //private string key = "b14ca5898a4e4133bbce2ea2315a1916";
         private readonly IConfiguration config;
 
-        public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper)
+        public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<CreateMemberCommandHandler> logger)
         {
             _tokenService = tokenService;
             _securityService = securityService;
             _memberRepository = membershipRepository;
             _mapper = mapper;
             config = _config;
+            _logger = logger;
         }
 
         public async Task<Result<UserDto>> Handle(LoginMemberCommand command, CancellationToken cancellationToken)

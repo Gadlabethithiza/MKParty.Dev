@@ -7,6 +7,7 @@ using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.VotingStations.Queries
 {
@@ -28,19 +29,43 @@ namespace eMKParty.BackOffice.Support.Application.Features.VotingStations.Querie
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<GetVotingStationsWithPaginationQueryHandler> _logger;
 
-        public GetVotingStationsWithPaginationQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetVotingStationsWithPaginationQueryHandler(IUnitOfWork unitOfWork, ILogger<GetVotingStationsWithPaginationQueryHandler> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
             _mapper = mapper;
         }
 
         public async Task<PaginatedResult<VotingStationDto>> Handle(GetVotingStationsWithPaginationQuery query, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Repository<VotingStation>().Entities
-                   .OrderBy(x => x.VotingStationName)
-                   .ProjectTo<VotingStationDto>(_mapper.ConfigurationProvider)
-                   .ToPaginatedListAsync(query.PageNumber, query.PageSize, cancellationToken);
+            PaginatedResult<VotingStationDto> Listing = null;
+
+            try
+            {
+                //_logger.LogInformation("Start Seri Log is Working");
+
+                Listing = await _unitOfWork.Repository<VotingStation>().Entities
+                       .OrderBy(x => x.VotingStationName)
+                       .ProjectTo<VotingStationDto>(_mapper.ConfigurationProvider)
+                       .ToPaginatedListAsync(query.PageNumber, query.PageSize, cancellationToken);
+
+                //_logger.LogInformation("End Seri Log is Working");
+
+                return Listing;
+
+                //return await _unitOfWork.Repository<VotingStation>().Entities
+                //       .OrderBy(x => x.VotingStationName)
+                //       .ProjectTo<VotingStationDto>(_mapper.ConfigurationProvider)
+                //       .ToPaginatedListAsync(query.PageNumber, query.PageSize, cancellationToken);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return Listing;
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
 using AutoMapper;
 using eMKParty.BackOffice.Support.Application.Common.Mappings;
+using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.ModifyMember;
 using eMKParty.BackOffice.Support.Application.Features.Players.Commands.DeletePlayer;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.DeactivateMember
 {
@@ -28,11 +30,13 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<DeactivateMemberCommandHandler> _logger;
 
-        public DeactivateMemberCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public DeactivateMemberCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<DeactivateMemberCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Result<int>> Handle(DeactivateMemberCommand command, CancellationToken cancellationToken)

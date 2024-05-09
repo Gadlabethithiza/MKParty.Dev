@@ -46,8 +46,11 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Province>(entity =>
             {
                 entity.ToTable("lst_Province", "support");
-                entity.Property<int>("Province_ID");
-                entity.HasKey("Province_ID");
+                entity.Property(e => e.Id).HasColumnName("Id");
+
+                //entity.Property<int>("Province_ID");
+                //entity.HasKey("Province_ID");
+                //entity.Property(e => e.Id).HasColumnName("Province_ID");
             });
 
             //modelBuilder.Entity<Municipality>().ToTable("lst_Municipality", "support");

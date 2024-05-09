@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using eMKParty.BackOffice.Support.Application.Common.Mappings;
 using eMKParty.BackOffice.Support.Application.DTOs;
 using eMKParty.BackOffice.Support.Application.Features.Players.Commands.CreatePlayer;
+using eMKParty.BackOffice.Support.Application.Features.VotingStations.Queries;
 using eMKParty.BackOffice.Support.Application.Interfaces;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
@@ -58,7 +59,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
         private readonly IAesOperation _securityService;
-        private readonly ILogger _logger;
+        private readonly ILogger<CreateMemberCommandHandler> _logger;
         private readonly IConfiguration config;
         //private readonly string key = "testdata";//"b14ca5898a4e4133bbce2ea2315a1916";
 
@@ -142,7 +143,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
             }
             catch (Exception ex)
             {
-                _logger.LogInformation($"About page visited at {ex} ", DateTime.UtcNow.ToLongTimeString());
+                _logger.LogError($"About page visited at {ex} ", DateTime.UtcNow.ToLongTimeString());
                 return await Result<MemberDto>.FailureAsync(null, "Error Occure:" + ex);
             }
         }

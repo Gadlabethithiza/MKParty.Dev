@@ -41,10 +41,10 @@ namespace eMKParty.BackOffice.Support.API.Controllers
             return await _mediator.Send(new GetAllProvincesQuery());
         }
 
-        [HttpGet("Provinces/{id}")]
-        public async Task<ActionResult<Result<ProvinceDto>>> GetProvinceById(int id)
+        [HttpGet("Provinces/{Id}")]
+        public async Task<ActionResult<Result<ProvinceDto>>> GetProvinceById(int Id)
         {
-            return await _mediator.Send(new GetAllProvinceByIdQuery(id));
+            return await _mediator.Send(new GetAllProvinceByIdQuery(Id));
         }
 
         //[HttpGet("Wards")]

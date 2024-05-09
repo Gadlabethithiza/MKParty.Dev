@@ -11,6 +11,7 @@ using eMKParty.BackOffice.Support.Domain.Entities.Feedback;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Municipalities.Queries
 {
@@ -21,13 +22,15 @@ namespace eMKParty.BackOffice.Support.Application.Features.Municipalities.Querie
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IProvinceRepository _repository;
+        private readonly ILogger<GetAllMunicipalitiesQueryHandler> _logger;
         //private readonly IMunicipalityRepository _mrepository;
 
-        public GetAllMunicipalitiesQueryHandler(IUnitOfWork unitOfWork, IProvinceRepository repository, IMapper mapper)
+        public GetAllMunicipalitiesQueryHandler(IUnitOfWork unitOfWork, IProvinceRepository repository, IMapper mapper, ILogger<GetAllMunicipalitiesQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _repository = repository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Result<List<MunicipalityFeedDto>>> Handle(GetAllMunicipalitiesQuery query, CancellationToken cancellationToken)

@@ -53,7 +53,7 @@ namespace eMKParty.BackOffice.Support.API.Controllers
         [Route("FindByWard/{wardId}")]
         public async Task<ActionResult<Result<List<MemberDto>>>> GetMembersByWard(int wardId)
         {
-            return await _mediator.Send(new GetAllMembersByProvinceQuery(wardId));
+            return await _mediator.Send(new GetAllMembersByWardQuery(wardId));
         }
 
         [HttpGet]
@@ -70,17 +70,17 @@ namespace eMKParty.BackOffice.Support.API.Controllers
             return await _mediator.Send(new GetMembersBySubRegionQuery(name));
         }
 
-        [HttpPost("Register")]
-        public async Task<ActionResult<Result<MemberDto>>> Create(CreateMemberCommand command)
-        {
-            return await _mediator.Send(command);
-        }
+        //[HttpPost("Register")]
+        //public async Task<ActionResult<Result<MemberDto>>> Create(CreateMemberCommand command)
+        //{
+        //    return await _mediator.Send(command);
+        //}
 
-        [HttpPost("Login")]
-        public async Task<ActionResult<Result<UserDto>>> Login(LoginMemberCommand command)
-        {
-            return await _mediator.Send(command);
-        }
+        //[HttpPost("Login")]
+        //public async Task<ActionResult<Result<UserDto>>> Login(LoginMemberCommand command)
+        //{
+        //    return await _mediator.Send(command);
+        //}
 
         [HttpPut("Modify_profile/{id}")]
         public async Task<ActionResult<Result<int>>> Update(int id, UpdateMemberCommand command)

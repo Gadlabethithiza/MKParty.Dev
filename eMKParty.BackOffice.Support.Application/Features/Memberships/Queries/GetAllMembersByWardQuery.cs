@@ -6,6 +6,7 @@ using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
 {
@@ -31,14 +32,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
         private readonly IMapper _mapper;
         private readonly IAesOperation _securityService;
         private readonly IConfiguration config;
+        private readonly ILogger<GetAllMembersByWardQueryHandler> _logger;
 
-        public GetAllMembersByWardQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper)
+        public GetAllMembersByWardQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<GetAllMembersByWardQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _memberRepository = membershipRepository;
             _mapper = mapper;
             config = _config;
             _securityService = securityService;
+            _logger = logger;
         }
 
         public async Task<Result<List<MemberDto>>> Handle(GetAllMembersByWardQuery query, CancellationToken cancellationToken)

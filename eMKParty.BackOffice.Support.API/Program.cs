@@ -3,20 +3,28 @@ using eMKParty.BackOffice.Support.Infrastructure.Extensions;
 using eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
+
+//var logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(builder.Configuration)
+//    .Enrich.FromLogContext()
+//    .CreateLogger();
+
+//builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+//Add support to logging with SERILOG
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
+//builder.Logging.ClearProviders();
+//builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
-
 builder.Services.AddControllers();
-
-
 
 var contact = new OpenApiContact()
 {
@@ -60,6 +68,10 @@ app.UseAuthorization(); // IS the student above 18 ?
 
 app.UseSwagger();
 app.UseStaticFiles();
+
+//Add support to logging request with SERILOG
+app.UseSerilogRequestLogging();
+
 app.UseSwaggerUI(c =>
 {
     if (!string.IsNullOrEmpty(configValue))

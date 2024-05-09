@@ -8,7 +8,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Wards.Queries
     {
         public int Ward_ID { get; set; }
         public string? WardCode { get; set; }
-        public string? FkMunicipality_ID { get; set; }
+        public int? FkMunicipality_ID { get; set; }
         public int? FkProvince_ID { get; set; }
         public string? createdby { get; set; }
         public DateTime? createddate { get; set; }

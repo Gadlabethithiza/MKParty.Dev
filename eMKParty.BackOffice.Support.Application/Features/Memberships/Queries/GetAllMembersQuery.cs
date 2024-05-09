@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetAllMembers
@@ -29,13 +30,15 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.G
         private readonly IMapper _mapper;
         private readonly IConfiguration config;
         private readonly IAesOperation _securityService;
+        private readonly ILogger<GetAllMembersQueryHandler> _logger;
 
-        public GetAllMembersQueryHandler(IUnitOfWork unitOfWork, IConfiguration _config, IAesOperation securityService, IMapper mapper)
+        public GetAllMembersQueryHandler(IUnitOfWork unitOfWork, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<GetAllMembersQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             config = _config;
             _securityService = securityService;
+            _logger = logger;
         }
 
         public async Task<Result<List<MemberDto>>> Handle(GetAllMembersQuery query, CancellationToken cancellationToken)

@@ -9,6 +9,7 @@ using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.GetMembersByBranch
 {
@@ -34,14 +35,16 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries.G
         private readonly IMapper _mapper;
         private readonly IAesOperation _securityService;
         private readonly IConfiguration config;
+        private readonly ILogger<GetAllMembersByBranchQueryHandler> _logger;
 
-        public GetAllMembersByBranchQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper)
+        public GetAllMembersByBranchQueryHandler(IUnitOfWork unitOfWork, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<GetAllMembersByBranchQueryHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _memberRepository = membershipRepository;
             _mapper = mapper;
             config = _config;
             _securityService = securityService;
+            _logger = logger;
         }
 
         public async Task<Result<List<MemberDto>>> Handle(GetAllMembersByBranchQuery query, CancellationToken cancellationToken)

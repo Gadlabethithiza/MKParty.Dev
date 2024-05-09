@@ -4,11 +4,13 @@ using System.Reflection;
 using System.Xml.Linq;
 using AutoMapper;
 using eMKParty.BackOffice.Support.Application.Features.Players.Commands.UpdatePlayer;
+using eMKParty.BackOffice.Support.Application.Features.VotingStations.Queries;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.ModifyMember
 {
@@ -43,11 +45,13 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<UpdateMemberCommandHandler> _logger;
 
-        public UpdateMemberCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateMemberCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UpdateMemberCommandHandler> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Result<int>> Handle(UpdateMemberCommand command, CancellationToken cancellationToken)
