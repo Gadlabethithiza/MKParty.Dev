@@ -18,7 +18,7 @@ namespace eMKParty.BackOffice.Support.Domain.Entities.Feedback
         public DateTime? modifieddate { get; set; }
         public Guid Guid { get; set; }
 
-        public Province? Province { get; set; }
+        //public Province? Province { get; set; }
 
         //public Province Province
         //{

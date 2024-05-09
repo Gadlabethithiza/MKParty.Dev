@@ -40,7 +40,7 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Repositories
                         citem.modifiedby = item.modifiedby;
                         citem.modifieddate = item.modifieddate;
                         citem.Guid = item.Guid;
-                        citem.Province = item.Province;
+                        //citem.Province = item.Province;
                         //citem.Province = provinces.Where(i => i.Province_ID == item.FkProvince_ID).SingleOrDefault().ProvinceDesc;
                         Listing.Add(citem);
                     }
