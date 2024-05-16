@@ -22,7 +22,7 @@ namespace eMKParty.BackOffice.Support.Domain.Entities
         public string surname { get; set; }
         public string id_no { get; set; }
         public string mobile { get; set; }
-        public string email { get; set; }
+        public string? email { get; set; }
         public string gender { get; set; }
         public string prefered_lang { get; set; }
         public string building_site_no { get; set; }

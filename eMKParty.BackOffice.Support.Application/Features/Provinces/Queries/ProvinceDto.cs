@@ -15,4 +15,17 @@ namespace eMKParty.BackOffice.Support.Application.Features.Provinces.Queries
         public DateTime? modifieddate { get; set; }
         public Guid Guid { get; set; }
     }
+
+    public class ProvinceViewModel
+    {
+        //[JsonProperty("latitude")]
+        public int id { get; set; }
+        public string? provinceCode { get; set; }
+        public string? provinceDesc { get; set; }
+        public string? createdby { get; set; }
+        public DateTime? createddate { get; set; }
+        public string? modifiedby { get; set; }
+        public DateTime? modifieddate { get; set; }
+        public Guid guid { get; set; }
+    }
 }

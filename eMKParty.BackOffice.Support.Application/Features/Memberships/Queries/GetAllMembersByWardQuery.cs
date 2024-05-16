@@ -82,7 +82,10 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Queries
                     citem.postal_code = item.postal_code;
                     citem.region = item.region;
                     citem.sub_region = item.sub_region;
-                    citem.email = item.email;
+
+                    if (!string.IsNullOrWhiteSpace(item.email))
+                        citem.email = _securityService.DecryptString(config["SecurityKey"], item.email);
+
                     citem.tel = item.tel;
                     citem.mobile = _securityService.DecryptString(config["SecurityKey"], item.mobile);
                     citem.mobile_use_whatsapp = item.mobile_use_whatsapp;

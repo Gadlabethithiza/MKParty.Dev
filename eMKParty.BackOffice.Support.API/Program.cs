@@ -32,6 +32,14 @@ try
     builder.Services.AddIdentityServices(builder.Configuration);
     builder.Services.AddControllers();
 
+    //change 15/05/2024
+    builder.Services.AddMvc(options =>
+    {
+        options.EnableEndpointRouting = false;
+    });
+    //end change 15/05/2024
+
+
     var contact = new OpenApiContact()
     {
         Name = "Bheki Mkhize",
@@ -63,6 +71,22 @@ try
     var configValue = builder.Configuration.GetValue<string>("DefaultValues:SiteDefinition");
 
     var app = builder.Build();
+
+    //change 15/05/2024
+    app.MapControllers();
+    //app.UsePathBase("/api/mkparty_api");
+    app.UsePathBase("/" + configValue);
+
+    app.Use((context, next) =>
+    {
+        //context.Request.PathBase = "/api/mkparty_api";
+        context.Request.PathBase = "/" + configValue;
+        return next();
+    });
+
+    app.UseMvc();
+    //end change 15/05/2024
+
     app.UseAuthentication(); //Student have valid ID
     app.UseAuthorization(); // IS the student above 18 ?
 
@@ -92,7 +116,6 @@ try
         c.DefaultModelsExpandDepth(-1);
     });
 
-    app.MapControllers();
 
     app.Run();
 }

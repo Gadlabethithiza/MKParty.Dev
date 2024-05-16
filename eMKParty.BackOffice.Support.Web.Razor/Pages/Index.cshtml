@@ -1,12 +1,24 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
-    Layout = "_BackOfficeLayout";
+    ViewData["Title"] = "Wecome to uMkhonto weSizwe Party";
+    Layout = "_BasicLayout";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>
+        Welcome to <b>uMkhonto weSizwe Party</b>, a powerful force dedicated to bringing about positive change and progress in society. As a true liberation movement, we stand for the people, by the people, and with the people.
+    </p>
+
+    <a asp-area="" asp-page="/Account/RegisterMember" class="btn btn-success btn-lg">Register New Member</a>
+
+    @*<div class="col-lg-12">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg" style="width:200px;">
+                Register New Member
+            </button>
+        </div>
+    </div>*@
 </div>
 

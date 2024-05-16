@@ -20,7 +20,7 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
         public string name { get; set; }
         public string surname { get; set; }
         public string id_no { get; set; }
-        public string email { get; set; }
+        public string? email { get; set; }
         public string mobile { get; set; }
         public string gender { get; set; }
         public string prefered_lang { get; set; }
@@ -55,6 +55,6 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
     {
         public string Username { get; set; }
         public string Token { get; set; }
-        public MemberDto MemberDetail { get; set; }
+        //public MemberDto MemberDetail { get; set; }
     }
 }

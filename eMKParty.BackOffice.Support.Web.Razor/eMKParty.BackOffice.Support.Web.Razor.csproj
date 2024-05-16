@@ -10,5 +10,35 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\Account\" />
+    <None Remove="Pages\BackOffice\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Account\" />
+    <Folder Include="Pages\BackOffice\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Domain\eMKParty.BackOffice.Support.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Application\eMKParty.BackOffice.Support.Application.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Infrastructure.Persistence\eMKParty.BackOffice.Support.Infrastructure.Persistence.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Infrastructure\eMKParty.BackOffice.Support.Infrastructure.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\eMKParty.BackOffice.Support.Shared\eMKParty.BackOffice.Support.Shared.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

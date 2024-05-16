@@ -32,15 +32,15 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         public string name { get; set; }
         public string surname { get; set; }
         public string id_no { get; set; }
-        public string email { get; set; }
+        public string? email { get; set; }
         public string mobile { get; set; }
         public string gender { get; set; }
         public string prefered_lang { get; set; }
-        public string building_site_no { get; set; }
-        public string suburb { get; set; }
-        public string city { get; set; }
-        public string postal_code { get; set; }
-        public string race { get; set; }
+        public string? building_site_no { get; set; }
+        public string? suburb { get; set; }
+        public string? city { get; set; }
+        public string? postal_code { get; set; }
+        public string? race { get; set; }
 
         public string? region { get; set; }
         public string? subregion { get; set; }
@@ -86,19 +86,25 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
 
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand command, CancellationToken cancellationToken)
         {
+            if (!string.IsNullOrWhiteSpace(command.municipality_name))
+                command.municipality_name = command.municipality_name.Replace("_", " ");
+
             if (!string.IsNullOrWhiteSpace(command.id_no))
-                if (await UserExist(command.id_no)) return await Result<MemberDto>.SuccessAsync(null, "South African ID No is already registered.");
+                if (await UserExist(command.id_no)) return await Result<MemberDto>.FailureAsync(null, "South African ID No is already registered.");
 
             _logger.LogInformation($"Passed ID Number", DateTime.UtcNow.ToLongTimeString());
 
 
             if (!string.IsNullOrWhiteSpace(command.email))
-                if (await EmailExist(command.email)) return await Result<MemberDto>.SuccessAsync(null, "Membership Email address is already taken.");
+                if (await EmailExist(command.email)) return await Result<MemberDto>.FailureAsync(null, "Membership Email address is already taken.");
 
             _logger.LogInformation($"Passed email verification", DateTime.UtcNow.ToLongTimeString());
 
             try
             {
+                if (!string.IsNullOrWhiteSpace(command.email))
+                    command.email = _securityService.EncryptString(config["SecurityKey"], command.email);
+
                 using var hmac = new HMACSHA512(); //for Hashing Password
 
                 var member = new MemberRegister()
@@ -126,7 +132,8 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     postal_code = command.postal_code,
                     region = command.region,
                     sub_region = command.subregion,
-                    email = _securityService.EncryptString(config["SecurityKey"], command.email),//must be encripted
+                    //email = _securityService.EncryptString(config["SecurityKey"], command.email),//must be encripted
+                    email = command.email,//must be encripted
                     tel = command.tel,//must be encripted
                     mobile = _securityService.EncryptString(config["SecurityKey"], command.mobile),//must be encripted
                     mobile_use_whatsapp = command.mobile_use_whatsapp,
@@ -156,12 +163,12 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     Token = _tokenService.CreateToken(member)
                 };
 
-                return await Result<MemberDto>.SuccessAsync(member_item, "Member Detail Successfully Created.");
+                return await Result<MemberDto>.SuccessAsync(member_item, "Success");
             }
             catch (Exception ex)
             {
                 _logger.LogError($"About page visited at {ex} ", DateTime.UtcNow.ToLongTimeString());
-                return await Result<MemberDto>.FailureAsync(null, "Error Occure:" + ex);
+                return await Result<MemberDto>.FailureAsync(null, "Error Occured:" + ex);
             }
         }
 

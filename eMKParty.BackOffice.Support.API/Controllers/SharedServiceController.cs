@@ -47,11 +47,11 @@ namespace eMKParty.BackOffice.Support.API.Controllers
             return await _mediator.Send(new GetAllProvinceByIdQuery(Id));
         }
 
-        //[HttpGet("Wards")]
-        //public async Task<ActionResult<Result<List<WardDto>>>> GetWards()
-        //{
-        //    return await _mediator.Send(new GetAllWardsQuery());
-        //}
+        [HttpGet("AllWards")]
+        public async Task<ActionResult<Result<List<WardDto>>>> GetWards()
+        {
+            return await _mediator.Send(new GetAllWardsQuery());
+        }
 
         //[HttpGet("VotingStations")]
         //public async Task<ActionResult<Result<List<VotingStationDto>>>> GetVotingStations()
@@ -95,5 +95,23 @@ namespace eMKParty.BackOffice.Support.API.Controllers
             var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
             return BadRequest(errorMessages);
         }
+
+        //[HttpGet]
+        //[Route("AllWards")]
+        //public async Task<ActionResult<PaginatedResult<WardDto>>> GetAllWardsWithPagination()
+        //{
+        //    var validator = new GetWardsWithPaginationValidator();
+
+        //    // Call Validate or ValidateAsync and pass the object which needs to be validated
+        //    var result = validator.Validate(query);
+
+        //    if (result.IsValid)
+        //    {
+        //        return await _mediator.Send(query);
+        //    }
+
+        //    var errorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
+        //    return BadRequest(errorMessages);
+        //}
     }
 }
