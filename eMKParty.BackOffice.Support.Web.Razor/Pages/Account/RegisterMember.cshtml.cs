@@ -147,16 +147,18 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.Account
             {
                 // read error message from
                 this.ProvincesSL = new SelectList(PopulatepProvincesDropDownList(), "provinceDesc", "provinceDesc");
-                this.MunicipalitiesSL = new SelectList(PopulatepMunicipalityDropDownList(), "MunicipalityName", "MunicipalityName"); 
+                this.MunicipalitiesSL = new SelectList(PopulatepMunicipalityDropDownList(), "MunicipalityName", "MunicipalityName");
                 this.WardsSL = new SelectList(PopulatepWardsDropDownList(), "WardCode", "WardCode");
                 this.GenderLS = new SelectList(PopulateGender(), "Value", "Value");
                 this.PreferredLanguageLS = new SelectList(PreferredLanguage(), "Value", "Value");
                 this.EmploymentSL = new SelectList(PopulateEmployment(), "Value", "Value");
                 this.RaceSL = new SelectList(PopulateRace(), "Value", "Value");
 
-                var message = dataList.errors;
+                //var message = dataList.errors;
+                //_logger.LogError("Error occured RegisterMemberModel() OnPost()");
                 //var data = JsonConvert.SerializeObject(User);
                 return Page();
+                //return RedirectToPage("./WelcomeSuccess");
             }
         }
 
