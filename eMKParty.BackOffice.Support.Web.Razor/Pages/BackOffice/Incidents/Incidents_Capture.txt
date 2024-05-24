@@ -1,0 +1,214 @@
+﻿
+<!--<style>
+    #success_message {
+        display: none;
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+
+<div class="container-fluid">
+    <form class="well form-horizontal" action="" method="post">
+        <fieldset>
+
+            <!-- Form Name -->
+<!--<legend><center><h2><b>VD Incidents Capturing Form</b></h2></center></legend><br>-->
+<div class="alert alert-warning" role="alert">
+        Failure <i class="glyphicon glyphicon-thumbs-up"></i>
+        <div asp-validation-summary="All" class="text-danger fs-6"></div>.
+    </div>
+
+
+<div class="form-group" style="text-align:center;">
+        <center>
+            <div asp-validation-summary="All" class="text-danger fs-6"></div>
+        </center>
+    </div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Party</label>
+    <div class="col-md-4 selectContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
+            <select asp-for="VDPartyCode" class="form-control"
+                    asp-items="@Model.PoliticalPartiesSL">
+                <option value="MK">-- Select Political Party --</option>
+            </select>
+        </div>
+        <span class="text-danger" asp-validation-for="VDPartyCode"></span>
+    </div>
+</div>
+<!-- Text input-->
+<!--<div class="form-group">
+    <label class="col-md-4 control-label">VD Unique Code</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
+            <input asp-for="VDUniqueCode" placeholder="VD Unique Code" class="form-control" type="text">
+        </div>
+        <span class="text-danger" asp-validation-for="VDUniqueCode"></span>
+    </div>
+</div>-->
+<!-- Text input-->
+<!--<div class="form-group">
+    <label class="col-md-4 control-label">VD Agent Code</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+            <input asp-for="VDAgentCode" placeholder="VD Agent Code" class="form-control" type="text">
+        </div>
+        <span class="text-danger" asp-validation-for="VDAgentCode"></span>
+    </div>
+</div>-->
+<!-- Text input-->
+<!--<div class="form-group">
+    <label class="col-md-4 control-label">Incident Description</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+            <textarea rows="5" cols="60" asp-for="Incident_Description" class="form-control" placeholder="Incident Description">
+
+             </textarea>
+        </div>
+        <span class="text-danger" asp-validation-for="Incident_Description"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Is Incident Related to IEC</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">-->
+<input asp-for="isIECRelated" class="styled" type="checkbox">
+
+<!--<input asp-for="isIECRelated" id="bootswitch-text1" type="checkbox" data-on-color="danger" data-off-color="success" data-on-text="Yes" data-off-text="No">
+        </div>
+        <span class="text-danger" asp-validation-for="isIECRelated"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Category</label>
+    <div class="col-md-4 selectContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-option-vertical"></i></span>
+            <select asp-for="Category" name="department" class="form-control selectpicker">
+                <option value="Other">--Select Incident Category--</option>
+                <option>Other</option>
+                <option>Voter Irregularity</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Severity</label>
+    <div class="col-md-4 selectContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-option-vertical"></i></span>
+            <select asp-for="Severity" class="form-control selectpicker">
+                <option value="Minor">--Select Incident Severity--</option>
+                <option>Minor</option>
+                <option>Major</option>
+                <option>Critical</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Status</label>
+    <div class="col-md-4 selectContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-option-vertical"></i></span>
+            <select asp-for="IncStatus" class="form-control selectpicker">
+                <option value="Open">--Select Incident Status--</option>
+                <option>Open</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+                <option>Deferred</option>
+                <option>Escalated</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Resolution</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+            <textarea rows="5" cols="60" asp-for="Resolution_Description" class="form-control" placeholder="Resolution Description">
+
+             </textarea>
+        </div>
+        <span class="text-danger" asp-validation-for="Resolution_Description"></span>
+    </div>
+</div>-->
+<!-- Text input-->-->
+<!--@*<div class="form-group">
+    <label class="col-md-4 control-label">Username</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="user_name" placeholder="Username" class="form-control" type="text">
+        </div>
+    </div>
+</div>*@-->
+<!--<!-- Text input-->-->
+<!--@*<div class="form-group">
+    <label class="col-md-4 control-label">Password</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="user_password" placeholder="Password" class="form-control" type="password">
+        </div>
+    </div>
+</div>*@-->
+<!--<!-- Text input-->-->
+<!--@*<div class="form-group">
+    <label class="col-md-4 control-label">Confirm Password</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="confirm_password" placeholder="Confirm Password" class="form-control" type="password">
+        </div>
+    </div>
+</div>*@-->
+<!--<!-- Text input-->-->
+<!--@*<div class="form-group">
+    <label class="col-md-4 control-label">E-Mail</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
+        </div>
+    </div>
+</div>*@-->
+<!--<!-- Text input-->-->
+<!--@*<div class="form-group">
+    <label class="col-md-4 control-label">Contact No.</label>
+    <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+            <input name="contact_no" placeholder="(639)" class="form-control" type="text">
+        </div>
+    </div>
+</div>*@-->
+<!-- Select Basic -->
+<!-- Success message -->
+<!--<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Success!.</div>-->
+<!-- Button -->
+<!--<div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-success">  <span class="glyphicon glyphicon-floppy-saved"></span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>-->

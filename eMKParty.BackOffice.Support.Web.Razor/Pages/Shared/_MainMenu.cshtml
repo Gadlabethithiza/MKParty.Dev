@@ -1,61 +1,72 @@
-﻿<ul class="sidebar-menu" data-widget="tree">
-    <li class="header">HEADER</li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Membership Management</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Wards Management</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Voting Station View</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Municipalities View</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Assets Management</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Branches Management</span></a></li>
+﻿<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    @*<li class="header">Back Office ADMIN</li>*@
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/Dashboard" class="nav-link"> <i class="far fas fa-link"></i> <span>Dashboard</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/VotingResults/Capture" class="nav-link"> <i class="far fas fa-link"></i> <span>Capture Vote Results</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/VotingResults/Index" class="nav-link"> <i class="far fas fa-link"></i> <span>Vote Results Management</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/Incidents/Capture" class="nav-link"> <i class="far fas fa-link"></i> <span>Capture Incident</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/Incidents/Index" class="nav-link"> <i class="far fas fa-link"></i> <span>Incidents Management</span></a></li>
+
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/CaptureMemberDetail" class="nav-link"><i class="far fas fa-link"></i> <span>Capture Membership Form</span></a></li>
+
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/MunicipalView" class="nav-link"><i class="far fas fa-link"></i> <span>View Municipalities</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/WardsView" class="nav-link"><i class="far fas fa-link"></i> <span>View Wards</span></a></li>
+    <li class="nav-item"><a asp-area="" asp-page="/BackOffice/VDView" class="nav-link"><i class="far fas fa-link"></i> <span>View Voting Stations</span></a></li>
+
+    @*<li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Membership Management</span></a></li>*@
+    @*<li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Wards Management</span></a></li>
+        <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Voting Station View</span></a></li>
+        <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Municipalities View</span></a></li>
+        <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Assets Management</span></a></li>
+        <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Branches Management</span></a></li>*@
 
 
     @*<li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Home</span></a></li>
-    <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Home</span></a></li>*@
+        <li class="active"><a asp-area="" asp-page="/Index"><i class="fa fa-link"></i> <span>Home</span></a></li>*@
 
 
     @*<li class="treeview">
-        <a href="#">
-            <i class="fa fa-link"></i> <span>Front-Desk Administration</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a asp-area="" asp-page="/Provinces/Index">Departments</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Nurse and Doctors</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Medical Aid</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Medical Services</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Patients Management</a></li>
-        </ul>
-    </li>
+            <a href="#">
+                <i class="fa fa-link"></i> <span>Front-Desk Administration</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="" asp-page="/Provinces/Index">Departments</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Nurse and Doctors</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Medical Aid</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Medical Services</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Patients Management</a></li>
+            </ul>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-link"></i> <span>Finance</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a asp-area="" asp-page="/Provinces/Index">Invoices</a></li>
-        </ul>
-    </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-link"></i> <span>Finance</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="" asp-page="/Provinces/Index">Invoices</a></li>
+            </ul>
+        </li>
 
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-link"></i> <span>Administration</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-            </span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a asp-area="" asp-page="/Administration/Users/Index">User Management</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Provinces</a></li>
-            <li><a asp-area="" asp-page="/Institutions/Index">Institutions</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Allergies</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Institution Services</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">Roles Management</a></li>
-            <li><a asp-area="" asp-page="/Provinces/Index">User Roles Management</a></li>
-        </ul>
-    </li>*@
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-link"></i> <span>Administration</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a asp-area="" asp-page="/Administration/Users/Index">User Management</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Provinces</a></li>
+                <li><a asp-area="" asp-page="/Institutions/Index">Institutions</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Allergies</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Institution Services</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">Roles Management</a></li>
+                <li><a asp-area="" asp-page="/Provinces/Index">User Roles Management</a></li>
+            </ul>
+        </li>*@
 </ul>

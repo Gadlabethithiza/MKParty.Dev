@@ -46,6 +46,12 @@
     <None Remove="Features\VotingStations\Queries\" />
     <None Remove="Features\Configurations\" />
     <None Remove="Features\Configurations\Queries\" />
+    <None Remove="Features\VotingResults\" />
+    <None Remove="Features\VotingResults\Queries\" />
+    <None Remove="Features\VotingResults\Commands\" />
+    <None Remove="Features\Incidents\" />
+    <None Remove="Features\Incidents\Commands\" />
+    <None Remove="Features\Incidents\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -87,6 +93,12 @@
     <Folder Include="Features\VotingStations\Queries\" />
     <Folder Include="Features\Configurations\" />
     <Folder Include="Features\Configurations\Queries\" />
+    <Folder Include="Features\VotingResults\" />
+    <Folder Include="Features\VotingResults\Queries\" />
+    <Folder Include="Features\VotingResults\Commands\" />
+    <Folder Include="Features\Incidents\" />
+    <Folder Include="Features\Incidents\Commands\" />
+    <Folder Include="Features\Incidents\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />

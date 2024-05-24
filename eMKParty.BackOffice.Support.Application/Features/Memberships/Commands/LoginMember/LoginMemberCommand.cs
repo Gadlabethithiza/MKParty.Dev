@@ -25,7 +25,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         public string Password { get; set; }
     }
 
-    internal class CreateMemberCommandHandler : IRequestHandler<LoginMemberCommand, Result<UserDto>>
+    internal class LoginMemberCommandHandler : IRequestHandler<LoginMemberCommand, Result<UserDto>>
     {
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
@@ -35,7 +35,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         //private string key = "b14ca5898a4e4133bbce2ea2315a1916";
         private readonly IConfiguration config;
 
-        public CreateMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<CreateMemberCommandHandler> logger)
+        public LoginMemberCommandHandler(ITokenService tokenService, IMembershipRepository membershipRepository, IConfiguration _config, IAesOperation securityService, IMapper mapper, ILogger<LoginMemberCommandHandler> logger)
         {
             _tokenService = tokenService;
             _securityService = securityService;
@@ -60,10 +60,22 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                 if (computedHash[i] != user.PasswordHash[i]) return await Result<UserDto>.FailureAsync(null, "Invalid Login Details");
             }
 
+            MemberDto userDetail = new MemberDto();
+            userDetail.name = user.name;
+            userDetail.surname = user.surname;
+
+            if(!string.IsNullOrWhiteSpace(user.email))
+               userDetail.email = _securityService.DecryptString(config["SecurityKey"], user.email);
+            if (!string.IsNullOrWhiteSpace(user.mobile))
+                userDetail.mobile = _securityService.DecryptString(config["SecurityKey"], user.mobile);
+            if (!string.IsNullOrWhiteSpace(user.role))
+                userDetail.role = user.role;            
+
             UserDto member_item = new UserDto
             {
                 Username = _securityService.DecryptString(config["SecurityKey"], user.username),
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                MemberDetail = userDetail           
             };
 
             return await Result<UserDto>.SuccessAsync(member_item, "Success");

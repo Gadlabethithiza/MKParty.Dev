@@ -1,0 +1,71 @@
+﻿
+body {
+    margin: 0;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3e5569;
+    text-align: left;
+    background-color: #eeeeee
+}
+
+#main-wrapper {
+    position: fixed;
+    height: 200px;
+    margin: 0;
+/*    background: #1F262D width: 100%;*/
+    overflow: hidden;
+    width: 100%;
+    overflow: hidden
+}
+
+
+
+    #main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5] {
+        background: #1F262D
+    }
+
+    #main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5], #main-wrapper .topbar[data-navbarbg=skin5] {
+        background: #1F262D
+    }
+
+    #main-wrapper .left-sidebar[data-sidebarbg=skin5], #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
+        background: #1F262D
+    }
+
+        #main-wrapper .left-sidebar[data-sidebarbg=skin5] .create-btn, #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul .create-btn {
+            background: #27a9e3
+        }
+
+.page-wrapper {
+    background: #eeeeee;
+    position: relative;
+}
+
+    .page-wrapper > .container-fluid, .page-wrapper > .container-lg, .page-wrapper > .container-md, .page-wrapper > .container-sm, .page-wrapper > .container-xl {
+        padding: 20px;
+        min-height: calc(100vh - 180px)
+    }
+
+.footer {
+    padding: 5px 10px
+}
+
+#main-wrapper {
+}
+
+    #main-wrapper[data-sidebartype=full] .page-wrapper {
+        margin-left: 5px
+    }
+
+
+
+.topbar {
+    height: 300px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -moz-transform: rotate(45deg)
+}

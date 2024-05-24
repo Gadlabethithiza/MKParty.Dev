@@ -1,0 +1,40 @@
+﻿body {
+    margin: 0;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3e5569;
+    text-align: left;
+    background-color: #eeeeee
+}
+
+#main-wrapper {
+    position: fixed;
+    height: 200px;
+    margin: 0;
+    overflow: hidden
+}
+
+
+    #main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5] {
+        background: #1F262D
+    }
+
+    #main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5], #main-wrapper .topbar[data-navbarbg=skin5] {
+        background: #1F262D
+    }
+
+    #main-wrapper .left-sidebar[data-sidebarbg=skin5], #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul {
+        background: #1F262D
+    }
+
+        #main-wrapper .left-sidebar[data-sidebarbg=skin5] .create-btn, #main-wrapper .left-sidebar[data-sidebarbg=skin5] ul .create-btn {
+            background: #27a9e3
+        }
+
+#main-wrapper {
+    width: 100%;
+    overflow: hidden
+}
+

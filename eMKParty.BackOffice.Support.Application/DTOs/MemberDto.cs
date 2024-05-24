@@ -13,8 +13,8 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
         public string? municipality_name { get; set; }
         public DateTime? membership_date { get; set; }
         public string? membership_no { get; set; }
-        public Boolean? membership_card_required { get; set; }
-        public Boolean? membership_card_printed { get; set; }
+        public Boolean? membership_card_required { get; set; } = true;
+        public Boolean? membership_card_printed { get; set; } = false;
         public DateTime? BirthDate { get; set; }
 
         public string name { get; set; }
@@ -35,8 +35,9 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
         public string? region { get; set; }
         public string? sub_region { get; set; }
         public string? tel { get; set; }
-        public Boolean? mobile_use_whatsapp { get; set; }
-        public Boolean? member_in_good_standing { get; set; }
+        public Boolean? mobile_use_whatsapp { get; set; } = true;
+        public Boolean? member_in_good_standing { get; set; } = true;
+        public Boolean? elections_agent { get; set; } = false;
         public string? role { get; set; }
         public string? username { get; set; }
         public byte[]? PasswordHash { get; set; }
@@ -55,6 +56,6 @@ namespace eMKParty.BackOffice.Support.Application.DTOs
     {
         public string Username { get; set; }
         public string Token { get; set; }
-        //public MemberDto MemberDetail { get; set; }
+        public MemberDto MemberDetail { get; set; }
     }
 }

@@ -1,0 +1,71 @@
+﻿@page
+@model eMKParty.BackOffice.Support.Web.Razor.Pages.BackOffice.VotingResults.CaptureModel
+@{
+    ViewData["Title"] = "Voting Results Capturing Form";
+    Layout = "_BackOfficeMainLayout";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Voting Results Capturing Form</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/BackOffice/VotingResults/Index">Voting Results</a></li>
+                    <li class="breadcrumb-item active">Voting Results Capturing Form</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+    <form class="well form-horizontal" action="" method="post">
+
+        <div class="container-fluid">
+            @*Voting Results Capturing Form - Comming Soon!!!*@
+
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">VD Voting Results</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Party</label>
+                        <select class="form-control select2" style="width: 100%;" asp-for="VDPartyCode" asp-items="@Model.PoliticalPartiesSL">
+                            <option value="MK">-- Select Political Party --</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="VDPartyCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>VD Unique Code</label>
+                        <input asp-for="VDUniqueCode" placeholder="VD Unique Code" class="form-control" type="text">
+                        <span class="text-danger" asp-validation-for="VDUniqueCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>VD Results</label>
+                        <input asp-for="VDResults" placeholder="VD Results" class="form-control" type="text">
+                        <span class="text-danger" asp-validation-for="VDResults"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>VD Agent Code</label>
+                        <input asp-for="VDAgentCode" placeholder="VD Agent Code" class="form-control" type="text">
+                        <span class="text-danger" asp-validation-for="VDAgentCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> SAVE</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+     </form>
+</section>
+
+

@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using eMKParty.BackOffice.Support.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using eMKParty.BackOffice.Support.Infrastructure.Extensions;
+using eMKParty.BackOffice.Support.Infrastructure.Persistence.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,36 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
     loggerConfiguration.WriteTo.Console();
     loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+});
+
+// Add services to the container.
+builder.Services.AddApplicationLayer();
+builder.Services.AddInfrastructureLayer();
+builder.Services.AddPersistenceLayer(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddControllers();
+
+
+builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+       .AddCookie(options =>
+       {
+           options.ExpireTimeSpan = TimeSpan.FromHours(10);
+           options.LoginPath = "/Account/Login/";
+           options.LogoutPath = "/Account/Logout/";
+           options.AccessDeniedPath = "/Account/AccessDenied";
+       });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
 // Add services to the container.
@@ -43,13 +77,13 @@ app.UseSerilogRequestLogging();
 
 //change 15/05/2024
 app.MapControllers();
-app.UsePathBase("/web");
+//app.UsePathBase("/web_test");
 
-app.Use((context, next) =>
-{
-    context.Request.PathBase = "/web";
-    return next();
-});
+//app.Use((context, next) =>
+//{
+//    context.Request.PathBase = "/web_test";
+//    return next();
+//});
 
 app.UseRouting();
 app.UseAuthentication();

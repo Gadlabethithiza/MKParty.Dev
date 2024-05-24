@@ -1,0 +1,128 @@
+﻿@page
+@model eMKParty.BackOffice.Support.Web.Razor.Pages.BackOffice.Incidents.CaptureModel
+@{
+        ViewData["Title"] = "Incident Capturing Form";
+        Layout = "_BackOfficeMainLayout";
+}
+
+    <style>
+        #success_message {
+            display: none;
+        }
+
+        textarea {
+            resize: none;
+        }
+    </style>
+
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Incident Capturing Form</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/BackOffice/Incidents/Index">Incidents</a></li>
+                        <li class="breadcrumb-item active">Incident Capturing Form</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+    <section class="content">
+        <form class="well form-horizontal" action="" method="post">
+            <div class="container-fluid">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">VD Incidents Capture</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Party</label>
+                            <select class="form-control select2" style="width: 100%;" asp-for="VDPartyCode" asp-items="@Model.PoliticalPartiesSL">
+                                <option value="MK">-- Select Political Party --</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="VDPartyCode"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>VD Unique Code</label>
+                            <input asp-for="VDUniqueCode" placeholder="VD Unique Code" class="form-control" type="text">
+                            <span class="text-danger" asp-validation-for="VDUniqueCode"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>VD Agent Code</label>
+                            <input asp-for="VDAgentCode" placeholder="VD Agent Code" class="form-control" type="text">
+                            <span class="text-danger" asp-validation-for="VDAgentCode"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Incident Description</label>
+                            <textarea rows="5" cols="60" asp-for="Incident_Description" class="form-control" placeholder="Incident Description">
+
+                         </textarea>
+                            <span class="text-danger" asp-validation-for="Incident_Description"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Is Incident Related to IEC</label>
+                            <input asp-for="isIECRelated" class="styled" type="checkbox">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select asp-for="Category" name="department" class="form-control select2">
+                                <option value="Other">--Select Incident Category--</option>
+                                <option>Other</option>
+                                <option>Voter Irregularity</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Severity</label>
+                            <select asp-for="Severity" class="form-control select2">
+                                <option value="Minor">--Select Incident Severity--</option>
+                                <option>Minor</option>
+                                <option>Major</option>
+                                <option>Critical</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select asp-for="IncStatus" class="form-control select2">
+                                <option value="Open">--Select Incident Status--</option>
+                                <option>Open</option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                                <option>Deferred</option>
+                                <option>Escalated</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Resolution</label>
+                            <textarea rows="5" cols="60" asp-for="Resolution_Description" class="form-control" placeholder="Resolution Description">
+
+                                </textarea>
+                            <span class="text-danger" asp-validation-for="Resolution_Description"></span>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> SAVE</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+         </form>
+    </section>

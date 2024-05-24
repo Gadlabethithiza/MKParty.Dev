@@ -38,6 +38,7 @@ namespace eMKParty.BackOffice.Support.Domain.Entities
         public string? tel { get; set; }
         public Boolean? mobile_use_whatsapp { get; set; } = true;
         public Boolean? member_in_good_standing { get; set; } = true;
+        public Boolean? elections_agent { get; set; } = false;
         public string? role { get; set; }
         public string? username { get; set; }
         public byte[]? PasswordHash { get; set; }
@@ -49,7 +50,9 @@ namespace eMKParty.BackOffice.Support.Domain.Entities
         public string? updatedby { get; set; }
         public DateTime? updateddate { get; set; }
         public Guid Guid { get; set; }
-        //public Branch Branch { get; set; }
+        //public virtual ICollection<Role> Roles { get; set; }
+
+
         //public Branch_Ward Ward { get; set; }
         //public string Token { get; set; }
     }

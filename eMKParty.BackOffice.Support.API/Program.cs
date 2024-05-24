@@ -74,13 +74,11 @@ try
 
     //change 15/05/2024
     app.MapControllers();
-    //app.UsePathBase("/api/mkparty_api");
-    app.UsePathBase("/" + configValue);
+    app.UsePathBase("/api");
 
     app.Use((context, next) =>
     {
-        //context.Request.PathBase = "/api/mkparty_api";
-        context.Request.PathBase = "/" + configValue;
+        context.Request.PathBase = "/api";
         return next();
     });
 
@@ -106,6 +104,10 @@ try
         }
         else
         {
+            //c.SwaggerEndpoint("v1/swagger.json", "uMkhonto Wesizwe Secured Basic API");
+            //c.InjectStylesheet("/custom.css");
+            //c.InjectJavascript("/custom.js");
+
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "uMkhonto Wesizwe Secured Basic API");
             c.InjectStylesheet("/swagger-ui/custom.css");
             c.InjectJavascript("/swagger-ui/custom.js");

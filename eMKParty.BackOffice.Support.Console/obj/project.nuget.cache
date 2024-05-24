@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "vAXMyAJlGQ+Vn+zD4vaXsK96zrQ7navZ0l7JeUd+N7yujRc0oYRumDxTUdH0os1mMz+K2mPJg+jcuwJMs3qHxg==",
+  "success": true,
+  "projectFilePath": "/Users/mac/Projects/WEB/eMKParty.BackOffice.Support.Solution/eMKParty.BackOffice.Support.Solution/eMKParty.BackOffice.Support.Console/eMKParty.BackOffice.Support.Console.csproj",
+  "expectedPackageFiles": [
+    "/Users/mac/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/Users/mac/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/mac/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/mac/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

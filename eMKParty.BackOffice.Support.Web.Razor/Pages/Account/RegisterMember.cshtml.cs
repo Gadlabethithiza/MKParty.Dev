@@ -8,11 +8,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using eMKParty.BackOffice.Support.Application.Features.Municipalities.Queries;
 using eMKParty.BackOffice.Support.Application.Features.Provinces.Queries;
+using eMKParty.BackOffice.Support.Application.Features.Wards.Queries;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Domain.Models;
 using eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts;
+using eMKParty.BackOffice.Support.Shared;
 using eMKParty.BackOffice.Support.Web.Razor.Pages.Shared;
 using Google.Protobuf.Compiler;
 using Google.Protobuf.WellKnownTypes;
@@ -22,6 +25,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
+//using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -31,6 +35,8 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.Account
 	public class RegisterMemberModel : SharedPageModel
     {
         private readonly ILogger<RegisterMemberModel> _logger;
+        private static IMediator _mediator;
+
         public SelectList ProvincesSL { get; set; }
         public SelectList MunicipalitiesSL { get; set; }
         public SelectList WardsSL { get; set; }
@@ -43,8 +49,9 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.Account
         [BindProperty]
         public RegisterViewModel User { get; set; }
 
-        public RegisterMemberModel(ILogger<RegisterMemberModel> logger)
+        public RegisterMemberModel(IMediator mediator, ILogger<RegisterMemberModel> logger)
         {
+            _mediator = mediator;
             _logger = logger;
         }
 
@@ -162,65 +169,39 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.Account
             }
         }
 
+
         //Get list of Provinces
         public static Collection<ProvinceViewModel> PopulatepProvincesDropDownList()
         {
             Collection<ProvinceViewModel> pro = new Collection<ProvinceViewModel>();
+            var data = _mediator.Send(new GetAllProvincesQuery());
 
-            var url = $"http://102.211.28.103/api/SharedServices/Provinces/";
-            //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-
-            if (response.IsSuccessStatusCode)
+            foreach(var item in data.Result.Data)
             {
-                var jsonString = response.Content.ReadAsStringAsync().Result;
-                var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
-                var provinces = JsonConvert.DeserializeObject<List<ProvinceViewModel>>(Convert.ToString(dataList.data));
-                if (provinces.Count != 0)
-                {
-                    foreach (var item in provinces)
-                    {
-                        pro.Add(item);
-                    }
-                }
+                ProvinceViewModel ditem = new ProvinceViewModel();
+                ditem.provinceCode = item.ProvinceCode;
+                ditem.provinceDesc = item.ProvinceDesc;
+                pro.Add(ditem);
             }
 
             return pro;
         }
 
+
         public static Collection<Municipality> PopulatepMunicipalityDropDownList()
         {
             Collection<Municipality> municipalities = new Collection<Municipality>();
 
-            var url = $"http://102.211.28.103/api/SharedServices/Municipalities/";
-            //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
+            var data = _mediator.Send(new GetAllMunicipalitiesQuery());
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-
-            if (response.IsSuccessStatusCode)
+            foreach (var item in data.Result.Data)
             {
-                var jsonString = response.Content.ReadAsStringAsync().Result;
-                var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
-                var municipalitiesLs = JsonConvert.DeserializeObject<List<Municipality>>(Convert.ToString(dataList.data));
-                if (municipalitiesLs.Count != 0)
-                {
-                    foreach (var item in municipalitiesLs)
-                    {
-                        municipalities.Add(item);
-                    }
-                }
+                Municipality ditem = new Municipality();
+                ditem.MunicipalityCode = item.MunicipalityCode;
+                ditem.MunicipalityName = item.MunicipalityName;
+                municipalities.Add(ditem);
             }
 
-            //var sortedCollection = municipalities.OrderBy(item => item.MunicipalityName);
-            //var data = municipalities.OrderBy(x => x.MunicipalityName).ToList();
             return municipalities;
         }
 
@@ -228,30 +209,113 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.Account
         {
             Collection<Ward> wards = new Collection<Ward>();
 
-            var url = $"http://102.211.28.103/api/SharedServices/AllWards/";
-            //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
+            var data = _mediator.Send(new GetAllWardsQuery());
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-
-            if (response.IsSuccessStatusCode)
+            foreach (var item in data.Result.Data)
             {
-                var jsonString = response.Content.ReadAsStringAsync().Result;
-                var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
-                var wardsLs = JsonConvert.DeserializeObject<List<Ward>>(Convert.ToString(dataList.data));
-                if (wardsLs.Count != 0)
-                {
-                    foreach (var item in wardsLs)
-                    {
-                        wards.Add(item);
-                    }
-                }
+                Ward ditem = new Ward();
+                ditem.WardCode = item.WardCode;
+                ditem.Ward_ID = item.Ward_ID;
+                wards.Add(ditem);
             }
 
             return wards;
         }
+
+
+        //Get list of Provinces
+        //public static Collection<ProvinceViewModel> PopulatepProvincesDropDownList()
+        //{
+        //    Collection<ProvinceViewModel> pro = new Collection<ProvinceViewModel>();
+
+
+
+        //    var url = $"http://102.211.28.103/api/SharedServices/Provinces/";
+        //    //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
+
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(url);
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //    HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var jsonString = response.Content.ReadAsStringAsync().Result;
+        //        var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
+        //        var provinces = JsonConvert.DeserializeObject<List<ProvinceViewModel>>(Convert.ToString(dataList.data));
+        //        if (provinces.Count != 0)
+        //        {
+        //            foreach (var item in provinces)
+        //            {
+        //                pro.Add(item);
+        //            }
+        //        }
+        //    }
+
+        //    return pro;
+        //}
+
+
+        //public static Collection<Municipality> PopulatepMunicipalityDropDownList()
+        //{
+        //    Collection<Municipality> municipalities = new Collection<Municipality>();
+
+        //    var url = $"http://102.211.28.103/api/SharedServices/Municipalities/";
+        //    //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
+
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(url);
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var jsonString = response.Content.ReadAsStringAsync().Result;
+        //        var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
+        //        var municipalitiesLs = JsonConvert.DeserializeObject<List<Municipality>>(Convert.ToString(dataList.data));
+        //        if (municipalitiesLs.Count != 0)
+        //        {
+        //            foreach (var item in municipalitiesLs)
+        //            {
+        //                municipalities.Add(item);
+        //            }
+        //        }
+        //    }
+
+        //    //var sortedCollection = municipalities.OrderBy(item => item.MunicipalityName);
+        //    //var data = municipalities.OrderBy(x => x.MunicipalityName).ToList();
+        //    return municipalities;
+        //}
+
+        //public static Collection<Ward> PopulatepWardsDropDownList()
+        //{
+        //    Collection<Ward> wards = new Collection<Ward>();
+
+        //    var url = $"http://102.211.28.103/api/SharedServices/AllWards/";
+        //    //var parameters = $"?query={query}&apiKey={Consts.SpoonacularKey}&number=5";
+
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(url);
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var jsonString = response.Content.ReadAsStringAsync().Result;
+        //        var dataList = JsonConvert.DeserializeObject<dynamic>(jsonString);
+        //        var wardsLs = JsonConvert.DeserializeObject<List<Ward>>(Convert.ToString(dataList.data));
+        //        if (wardsLs.Count != 0)
+        //        {
+        //            foreach (var item in wardsLs)
+        //            {
+        //                wards.Add(item);
+        //            }
+        //        }
+        //    }
+
+        //    return wards;
+        //}
 
         public static List<SelectListItem> PopulateGender()
         {

@@ -22,9 +22,11 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
         public DbSet<VotingStation> VotingStations { get; set; }
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Config> Configurations { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<VotingResult> VotingResults { get; set; }
+        public DbSet<Incident> Incidents { get; set; }
 
         //static readonly string connectionString = "Server=102.211.28.103:3306;User ID=root; Password=Pr0v1d3nce@MK; Database=mkpartymasterdb";
-
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseMySQL(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -33,6 +35,18 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+
+            modelBuilder.Entity<Incident>(entity =>
+            {
+                entity.ToTable("VD_Incidents");
+                entity.Property(e => e.Id).HasColumnName("Id");
+            });
+
+            modelBuilder.Entity<VotingResult>(entity =>
+            {
+                entity.ToTable("VD_VotingResults");
+                entity.Property(e => e.Id).HasColumnName("Id");
+            });
 
             modelBuilder.Entity<Config>(entity =>
             {
@@ -57,6 +71,9 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
             {
                 entity.ToTable("lst_VotingStation");
                 entity.Property(e => e.VotingStation_ID).HasColumnName("id");
+
+                //entity.Property(x => x.VotingDistrict)
+                //      .HasConversion<string>();
             });
 
             modelBuilder.Entity<Ward>(entity =>
@@ -70,6 +87,15 @@ namespace eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts
             {
                 entity.ToTable("membership");
             });
+
+
+            //modelBuilder.Entity<MemberRegister>()
+            //  .HasMany(p => p.Roles)
+            //  .WithMany(b => b.Users)
+            //  .Map(p =>
+            //  {
+                  
+            //  });
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

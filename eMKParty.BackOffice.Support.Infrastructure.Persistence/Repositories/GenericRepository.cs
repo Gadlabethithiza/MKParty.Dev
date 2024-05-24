@@ -1,6 +1,7 @@
 ﻿using System;
 using eMKParty.BackOffice.Support.Application.Interfaces.Repositories;
 using eMKParty.BackOffice.Support.Domain.Common;
+using eMKParty.BackOffice.Support.Domain.Entities;
 using eMKParty.BackOffice.Support.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 

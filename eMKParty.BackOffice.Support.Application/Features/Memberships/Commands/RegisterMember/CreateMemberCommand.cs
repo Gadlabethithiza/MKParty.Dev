@@ -50,9 +50,10 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
         public string? membership_no { get; set; }
         public DateTime? membership_date { get; set; } = DateTime.Now;
         public Boolean? membership_card_required { get; set; } = true;
-        public Boolean? membership_card_printed { get; set; } = true;
+        public Boolean? membership_card_printed { get; set; } = false;
         public Boolean? mobile_use_whatsapp { get; set; } = true;
         public Boolean? member_in_good_standing { get; set; } = true;
+        public Boolean? elections_agent { get; set; } = false;
         public string? role { get; set; } = "basic_user"; //administrator
         public string? username { get; set; }
         public string? PasswordHash { get; set; }
@@ -137,6 +138,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     tel = command.tel,//must be encripted
                     mobile = _securityService.EncryptString(config["SecurityKey"], command.mobile),//must be encripted
                     mobile_use_whatsapp = command.mobile_use_whatsapp,
+                    elections_agent = command.elections_agent,
                     role = command.role,
                     username = _securityService.EncryptString(config["SecurityKey"], command.id_no),//must be encripted
                     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("555-admin")),
