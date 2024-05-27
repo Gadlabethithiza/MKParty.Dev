@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using eMKParty.BackOffice.Support.Application.Common.Mappings;
 using eMKParty.BackOffice.Support.Application.DTOs;
 using eMKParty.BackOffice.Support.Application.Interfaces;
@@ -9,18 +8,18 @@ using eMKParty.BackOffice.Support.Shared;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.RegisterMember;
 using AutoMapper.QueryableExtensions;
 using eMKParty.BackOffice.Support.Application.Features.VotingStations.Queries;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace eMKParty.BackOffice.Support.Application.Features.VotingResults.Commands
 {
-	public class CreateVotingResultCommand : IRequest<Result<VotingResultDto>>, IMapFrom<VotingResult>
+    public class CreateVotingResultCommand : IRequest<Result<VotingResultDto>>, IMapFrom<VotingResult>
     {
         public string VDPartCode { get; set; } = "MK";
         public string VDUniqueCode { get; set; }
-        public int VDResults { get; set; }
+        public string VDResults { get; set; }
         public string VDAgentCode { get; set; }
     }
 
@@ -45,6 +44,8 @@ namespace eMKParty.BackOffice.Support.Application.Features.VotingResults.Command
 
         public async Task<Result<VotingResultDto>> Handle(CreateVotingResultCommand command, CancellationToken cancellationToken)
         {
+            _logger.Log(LogLevel.Information, JsonConvert.SerializeObject(command));
+
             //Validate VD Unique Code
             if (!string.IsNullOrWhiteSpace(command.VDUniqueCode))
                 if (!await VotingStationExist(command.VDUniqueCode)) return await Result<VotingResultDto>.FailureAsync(null, "Voting Stationg VD Code does not exist.");
@@ -67,17 +68,28 @@ namespace eMKParty.BackOffice.Support.Application.Features.VotingResults.Command
                 //Validate if Results Exist            
                 if (!string.IsNullOrWhiteSpace(command.VDPartCode) && !string.IsNullOrWhiteSpace(command.VDUniqueCode))
                 {
-                    //var votingResult = await VotingResultsExist(command.VDUniqueCode, command.VDPartCode.Trim());
+                    int _VDResults = 0;
 
-                    //Populate the object to Post
-                    //if (votingResult == null) //Insert New
-                    //{
+                    if (!string.IsNullOrWhiteSpace(command.VDResults))
+                    {
+                        if(Validations.isSpecificType(command.VDResults, "int"))                        
+                            _VDResults = Convert.ToInt32(command.VDResults);
+                        else
+                            return await Result<VotingResultDto>.FailureAsync(null, "Voting Results must be numeric.");
+                    }
+
+
+                        //var votingResult = await VotingResultsExist(command.VDUniqueCode, command.VDPartCode.Trim());
+
+                        //Populate the object to Post
+                        //if (votingResult == null) //Insert New
+                        //{
                     var item = new VotingResult()
                     {
                         VDPartCode = command.VDPartCode.Trim(),
                         VDUniqueCode = command.VDUniqueCode,
                         VDAgentCode = agentInfo.id_no,
-                        VDResults = command.VDResults,
+                        VDResults = _VDResults,
                         VDYear = DateTime.Now.Year,
                         creationdate = DateTime.Now,
                         updateddate = DateTime.Now,
@@ -139,8 +151,15 @@ namespace eMKParty.BackOffice.Support.Application.Features.VotingResults.Command
 
         private async Task<MemberDto> UserExistAndIsAnAgent(string id_no)
         {
-            var returnValu = await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.elections_agent == false && x.id_no == _securityService.EncryptString(_config["SecurityKey"], id_no))
+            var returnValu = await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.elections_agent == true && x.id_no == _securityService.EncryptString(_config["SecurityKey"], id_no))
                                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+
+            //var returnValu = await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.elections_agent == false && _securityService.DecryptString(_config["SecurityKey"], x.id_no) == id_no)
+            //                       .ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+
+
+            //var returnValu = await _unitOfWork.Repository<MemberRegister>().Entities.Where(x => x.id_no == _securityService.EncryptString(_config["SecurityKey"], id_no))
+            //                       .ProjectTo<MemberDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
 
             return returnValu;
         }

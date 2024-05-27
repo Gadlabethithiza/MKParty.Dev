@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.RegisterMember
@@ -87,6 +88,11 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
 
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand command, CancellationToken cancellationToken)
         {
+            _logger.Log(LogLevel.Information, JsonConvert.SerializeObject(command));
+
+            if (!string.IsNullOrWhiteSpace(command.province_name))
+                command.province_name = command.province_name.Replace("_", " ");
+
             if (!string.IsNullOrWhiteSpace(command.municipality_name))
                 command.municipality_name = command.municipality_name.Replace("_", " ");
 
@@ -138,7 +144,8 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     tel = command.tel,//must be encripted
                     mobile = _securityService.EncryptString(config["SecurityKey"], command.mobile),//must be encripted
                     mobile_use_whatsapp = command.mobile_use_whatsapp,
-                    elections_agent = command.elections_agent,
+                    //elections_agent = command.elections_agent,
+                    elections_agent = true,
                     role = command.role,
                     username = _securityService.EncryptString(config["SecurityKey"], command.id_no),//must be encripted
                     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("555-admin")),
@@ -148,7 +155,7 @@ namespace eMKParty.BackOffice.Support.Application.Features.Memberships.Commands.
                     creationdate = DateTime.Now,
                     updateddate = DateTime.Now,
                     creationby = "Portal Administrator",
-                    updatedby = "Portal Administrator",
+                    updatedby = "Portal Administrator",                   
                     Guid = Guid.NewGuid()
                 };
 

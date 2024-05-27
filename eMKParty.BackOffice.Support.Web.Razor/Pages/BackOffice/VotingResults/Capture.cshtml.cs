@@ -37,8 +37,8 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.BackOffice.VotingResults
 
         //[RegularExpression("([1-9][0-9]*)")] 
         [BindProperty, Required]
-        [DataType(DataType.Currency)]
-        [Range(0, Int32.MaxValue, ErrorMessage = "VD Results should not contain characters")]
+        //[DataType(DataType.Currency)]
+        //[Range(0, Int32.MaxValue, ErrorMessage = "VD Results should not contain characters")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "VD Results must be numeric")]
         public int VDResults { get; set; }
 
@@ -89,7 +89,7 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.BackOffice.VotingResults
                 command.VDPartCode = this.VDPartyCode;
                 command.VDUniqueCode = this.VDUniqueCode;
                 command.VDAgentCode = this.VDAgentCode;
-                command.VDResults = this.VDResults;
+                command.VDResults = this.VDResults.ToString();
                 var returnVal = await _mediator.Send(command);
                 return RedirectToPage(ReturnUrl);
             }
