@@ -30,7 +30,7 @@ namespace eMKParty.BackOffice.Support.Web.Razor.Pages.BackOffice
         {
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToPage("/BackOffice/Dashboard");
+                return RedirectToPage("~/Account/Login");
             }
 
             return Page();
